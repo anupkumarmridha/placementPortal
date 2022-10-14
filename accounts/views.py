@@ -3,21 +3,26 @@ from django.urls import reverse_lazy, reverse
 
 from accounts.EmailBackEnd import EmailBackEnd
 from django.contrib.auth import authenticate, login, logout
-from accounts.models import Student, PR, User
+from accounts.models import Student, User
 from django.contrib import messages
 from home import views 
 # Create your views here.
+
+def admin_home(request):
+    pass
+
 def handelSingup(request):
     if request.method =='POST':
-
         #Get the post parameters
         username = request.POST['username']
         fname = request.POST['fname']
         lname = request.POST['lname']
-        email = request.POST['email']
+        webMail= username+'@nitt.edu'
+        email = webMail
+        # email = request.POST['email']
         pass1 = request.POST['pass1']
         pass2 = request.POST['pass2']
-        user_type=request.POST.get('user_type')
+        user_type='2'
         #check for errorneous input
         print(user_type)
 
@@ -26,6 +31,7 @@ def handelSingup(request):
             return redirect('handelSingup')    
 
         #Create User
+        
         try:
             myuser = User.objects.create_user(username=username, password=pass1, email=email, first_name=fname, last_name=lname, user_type=user_type)
 
@@ -39,48 +45,29 @@ def handelSingup(request):
     else:
         return HttpResponse("404 - Not Found")
 
-"""
+
 def handleLogin(request):
     if request.method !='POST':
         return HttpResponse('Submission outside this window is not allowed 😎')
     else:
         #Get the post parameters
         loginusername = request.POST['loginusername']
+        loginusername=loginusername+'@nitt.edu'
         loginpassword = request.POST['loginpassword']
-        user =EmailBackEnd.authenticate(request, username=loginusername, password=loginpassword)
-        
+        user =EmailBackEnd.authenticate(request, username=loginusername, password=loginpassword)      
         if user is not None:
             login(request, user)
-            # messages.success(request, "Successfuly logged in 🥰")
-            user_type = user.user_type
-            print(user_type)
-            #print("username : "+ request.POST.get("loginusername")+ "Password: " +request.POST.get("loginpassword"))
-                
-            if user_type == "1":
-                # return HttpResponse("Student Login")
-                return redirect(views.homeView)
-
-            elif user_type == '2':
-                customer_exist = Customer.objects.filter(user=user).exists()
-                if customer_exist:
-                    messages.success(request,f"Welcome {user.username} to Bid 'N Build !")
-                    return redirect(views.homeView)
-
-                return redirect('add_customer')
-
-            elif user_type == '3':
-                try:
-                    company=Company.objects.get(user=user.id)
-                    print(company.company_name)
-                except:
-                    pass
-                
-                company_exist = Company.objects.filter(user=user).exists()
-                if company_exist:
-                    messages.success(request,f"Welcome {company.company_name} to Bid 'N Build !")
-                    return redirect(views.all_product_details)
-                return redirect('add_company')
+            messages.success(request, "Successfuly logged in 🥰")
         else:
             messages.error(request, "Invalid credentialsl, Please try again 😎")
             return redirect(views.homeView)
-"""
+
+def handleLogout(request):
+    if request.method=='POST':
+        value=request.POST['value']
+        logout(request)
+        messages.success(request, "Successfuly logged out 🥰")
+        
+        return redirect(views.homeView)
+    else:
+        return HttpResponse('Sorry No Users Logged in 😎') 
