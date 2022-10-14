@@ -58,6 +58,7 @@ def handleLogin(request):
         if user is not None:
             login(request, user)
             messages.success(request, "Successfuly logged in 🥰")
+            return redirect(views.homeView)
         else:
             messages.error(request, "Invalid credentialsl, Please try again 😎")
             return redirect(views.homeView)

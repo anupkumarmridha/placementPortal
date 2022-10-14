@@ -8,75 +8,7 @@
         <button class="navbar-toggler border-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <i class="bi bi-list"></i>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
-            <li class="nav-item mx-2">
-              <a class="nav-link {% block productactive %}{% endblock productactive %}" href="/all-product-details">Listings</a>
-            </li>
-            
-             <!-- <li class="nav-item mx-2">
-              <
-            
-            
-
-              {% comment %} <li class="nav-item mx-2">
-              <a class="nav-link " href="{% url 'add_customer' %}">add customer</a>
-             </li> 
-
-             <li class="nav-item mx-2">
-              <a class="nav-link" href="{% url 'add_company' %}">add company</a>
-             </li>  {% endcomment %} -->
-            
-            {% if user.is_authenticated %}
-
-              {% if user.user_type == '2' or user.user_type == '1' %}
-              <li class="nav-item mx-2">
-                <a class="nav-link {% block addProductActive %}{% endblock addProductActive %}" href="{% url 'add_product' %}">Add Product</a>
-              </li>
-            
-
-              <li class="nav-item mx-2">
-                <a class="nav-link {% block CustomerProductsActive %}{% endblock CustomerProductsActive %}" href="{% url 'customer_product_list' user.pk %}">Your Products</a>
-              </li>
-
-              
-              <li class="nav-item mx-2">
-                <a class="nav-link {% block BidDetailsActive %}{% endblock BidDetailsActive %}" href="{% url 'bid_details' %}">Bid Details</a>
-              </li>
-              
-              {% endif %}
-
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="{% url 'all_category_details' %}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Category
-              </a>
-              
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                {% for cats in cats_menu %}
-                <li><a class="dropdown-item" href="{% url 'category_details' cats.name %}">{{ cats.name }}</a></li>
-                {% endfor %}
-              </ul>
-             
-            </li>
-              {% if user.user_type == '3' or user.user_type == '1' %}
-              <li class="nav-item mx-2">
-                <a class="nav-link {% block mywinactive %}{% endblock mywinactive %}" aria-current="page" href="{% url 'my_win_products' %}">My Winings</a>
-              </li>
-              <li class="nav-item mx-2">
-                <a class="nav-link {% block mybidsactive %}{% endblock mybidsactive %}" aria-current="page" href="{% url 'bid_products_list' %}">My Bids Products</a>
-              </li>
-
-              {% endif %}
-            {% endif %}
-          </ul>
-
-          
-          <!-- {% comment %} <form class="d-flex">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-          </form> {% endcomment %} -->
-
+        
           {% comment %} login signup {% endcomment %}
           {% if user.is_authenticated %}
           <ul class="navbar-nav mr-2">
@@ -95,7 +27,6 @@
                         <button class="dropdown-item" type="submit">Logout</button>
                     </form>
                     
-                     <a class="dropdown-item" href="{% url 'view_profile' %}">View Profile</a> 
                 </div>
             </li>
         </ul>
@@ -109,7 +40,7 @@
         <button type="button" class="btn btn-danger mr-2" data-toggle="modal" data-target="#singupModal">
             Sing Up
         </button>  
-        {% comment %} <a class="nav-link" type="button" class="btn btn-danger mr-2" href="{% url 'register' %}">Register</a> {% endcomment %}
+        
         {% endif %}
         </div>
       </div>
