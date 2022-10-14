@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'home.apps.HomeConfig',
     'accounts.apps.AccountsConfig',
-    'ckeditor'
+    'ckeditor',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
