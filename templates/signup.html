@@ -14,14 +14,6 @@
             <div class="modal-body">
                 <form action='{% url 'handelSingup' %}' method='post'>
                     <div class="form-group">
-                        <select class="form-select" name="user_type" aria-label="Default select example">
-                            <option selected>SignUp as a</option>
-                            <option value="2">Customer</option>
-                            <option value="3">Company</option>
-                          </select>
-                      </div>
-                      
-                    <div class="form-group">
                         <label for="username">Username</label>
                         <input type="text" class="form-control" id="username" name="username" placeholder="choos a uniq username">
                       </div>
@@ -37,7 +29,7 @@
                             autocomplete="lname" required>
                     </div>
 
-
+<!--
                     <div class="form-group">
                         <label for="email">Email address</label>
                         <div class="mx-0">
@@ -48,7 +40,7 @@
                             </div>
                         </div>
                     </div>
-
+-->
                     <div class="form-group">
                         <label for="pass1">Choose Password</label>
                         <input type="password" class="form-control" id="pass1" name="pass1"
