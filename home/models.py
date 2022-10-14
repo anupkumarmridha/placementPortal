@@ -7,4 +7,4 @@ class Job(models.Model):
     ctc = models.CharField(max_length = 10)
     profile = models.CharField(max_length = 255)
     company = models.CharField(max_length = 255)
-    location = models.CharField()
+    location = models.CharField(max_length = 500)
