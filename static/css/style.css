@@ -9,10 +9,13 @@
 }
 body{
     background-color: var(--aluminium);
-    height: 100vh;
+    overflow: visible !important;
 }
+
 .navbar{
     background-color: var(--aluminium);
+    border-bottom: 1px solid rgba(0,0,0,.2);
+    position: relative;
 }
 .nav-item a{
     text-decoration: none;
@@ -22,13 +25,12 @@ body{
     border-radius: 4rem;
     
 }
-.nav-item a:hover{
-    color: white;
-    background-color: rgb(219, 121, 24);
-    text-shadow: 0.2rem 0.2rem 0.8rem rgb(219, 111, 3);
-    /* text-shadow: 0.05rem 0.05rem 0.1rem var(--tangerine) ; */
-    /* padding: 5px; */
+
+/* Button animation */
+.btn:focus, .btn:hover {
+    color: #0a58ca;
 }
+
 .cardcss{
     border-radius: 1rem;
     padding: 1rem;
@@ -49,6 +51,14 @@ body{
     background-color: var(--tangerine);
     border-radius: 3rem;
 }
+
+.profile-item-label{
+    font-weight: bold;
+}
+.profile-item-content{
+    color: #333;
+}
+
 @media only screen and (max-width: 922px) {
     #add-prod-css{
         width: 95%;
@@ -90,6 +100,21 @@ body{
 .land-form{
     animation: fadeInUp 3s;
 }
+
+/* Log in list */
+.list-group-item {
+    border: none;
+    padding: 0.3rem 0;
+}
+
+.login-links {
+    text-decoration: none;
+}
+
+.login-links:hover {
+    text-decoration: none;
+}
+
 @keyframes fadeInDown{
     0%{
         opacity: 0.3;
@@ -118,3 +143,70 @@ body{
         transform: translatey(0);
     }
 }
+
+.offcanvas-start {
+    width: 230px;
+}
+
+.offcanvas-header {
+    justify-content: center;
+}
+
+.sidenav-list {
+    list-style: none;
+    text-align: left;
+    padding-left: 0;
+}
+
+.sidenav-list-item {
+    text-decoration: none;
+    padding: 1rem 0;
+}
+
+.dash-link {
+    text-decoration: none;
+    color: black;
+}
+
+.dash-link:hover {
+    text-decoration: none;
+}
+
+.main-container {
+    position: relative;
+    float: right;
+    width: calc(100% - 230px);
+}
+
+/* Profile Styling */
+.profile-wrapper {
+    padding: 2rem;
+}
+
+.profile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.profile-img {
+    height: 100px;
+    max-width: 100%;
+    border-radius: 0.1875rem;
+}
+
+.profile-details {
+    margin-top: 2rem;
+}
+
+.detail-wrapper{
+    padding: 2rem;
+}
+
+/* input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0; 
+} */
