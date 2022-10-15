@@ -1,74 +1,132 @@
 from django.shortcuts import render, HttpResponse, redirect
-from django.urls import reverse_lazy, reverse
 
 from accounts.EmailBackEnd import EmailBackEnd
 from django.contrib.auth import authenticate, login, logout
 from accounts.models import Student, User
 from django.contrib import messages
-from home import views 
-from django.contrib.auth import get_user_model
-User = get_user_model()
+from home import views
 
-
-#imports for password reset
-from django.core.mail import send_mail, BadHeaderError
-from django.http import HttpResponse
-from django.contrib.auth.forms import PasswordResetForm
-from django.contrib.auth.models import User
+from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import render_to_string
-from django.db.models.query_utils import Q
-from django.utils.http import urlsafe_base64_encode
-from django.contrib.auth.tokens import default_token_generator
-from django.utils.encoding import force_bytes
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_bytes, force_str
+from django.core.mail import EmailMessage
+from typing import Protocol
+
 # Create your views here.
+
+from .tokens import account_activation_token
+
+
+def activate(request, uidb64, token):
+    try:
+        uid = force_str(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+    except:
+        user = None
+
+    if user is not None and account_activation_token.check_token(user, token):
+        user.is_active = True
+        user.save()
+
+        messages.success(
+            request,
+            "Thank you for your email confirmation. Now you can login your account.",
+        )
+        return redirect("handleLogin")
+    else:
+        messages.error(request, "Activation link is invalid!")
+
+    return redirect(views.homeView)
+
+
+def activateEmail(request, user, to_email):
+    mail_subject = "Activate your user account."
+    message = render_to_string(
+        "template_activate_account.html",
+        {
+            "user": user.username,
+            "domain": get_current_site(request).domain,
+            "uid": urlsafe_base64_encode(force_bytes(user.pk)),
+            "token": account_activation_token.make_token(user),
+            "protocol": "https" if request.is_secure() else "http",
+        },
+    )
+    email = EmailMessage(mail_subject, message, to=[to_email])
+    if email.send():
+        messages.success(
+            request,
+            f"Dear <b>{user}</b>, please go to you email <b>{to_email}</b> inbox and click on \
+                received activation link to confirm and complete the registration. <b>Note:</b> Check your spam folder.",
+        )
+    else:
+        messages.error(
+            request,
+            f"Problem sending email to {to_email}, check if you typed it correctly.",
+        )
+
 
 def admin_home(request):
     pass
 
+
 def handelSingup(request):
-    if request.method =='POST':
-        #Get the post parameters
-        username = request.POST['username']
-        fname = request.POST['fname']
-        lname = request.POST['lname']
-        webMail= username+'@nitt.edu'
+    if request.method == "POST":
+        # Get the post parameters
+        username = request.POST["username"]
+        fname = request.POST["fname"]
+        lname = request.POST["lname"]
+        webMail = username + "@nitt.edu"
         email = webMail
         # email = request.POST['email']
-        pass1 = request.POST['pass1']
-        pass2 = request.POST['pass2']
-        user_type='2'
-        #check for errorneous input
+        pass1 = request.POST["pass1"]
+        pass2 = request.POST["pass2"]
+        user_type = "2"
+        # check for errorneous input
         print(user_type)
 
-        if pass1 != pass2 :
+        if pass1 != pass2:
             messages.error(request, "Password do not match.")
-            return redirect('handelSingup')    
+            return redirect("handelSingup")
 
-        #Create User
-        
+        # Create User
+
         try:
-            myuser = User.objects.create_user(username=username, password=pass1, email=email, first_name=fname, last_name=lname, user_type=user_type)
-
+            myuser = User.objects.create_user(
+                username=username,
+                password=pass1,
+                email=email,
+                first_name=fname,
+                last_name=lname,
+                user_type=user_type,
+            )
+            myuser.is_active = False
             myuser.save()
+            
+            # print("here")
+            activateEmail(request, myuser, email)
             messages.success(request, "Account Created Successfully!")
             return redirect(views.homeView)
 
-        except:
+        except Exception as e:
+            print(e)
             messages.error(request, "Failed to SignUp!")
-            return redirect('home')
+            return redirect(views.homeView)
     else:
         return HttpResponse("404 - Not Found")
 
 
 def handleLogin(request):
-    if request.method !='POST':
-        return HttpResponse('Submission outside this window is not allowed 😎')
+    if request.method != "POST":
+        return HttpResponse("Submission outside this window is not allowed 😎")
     else:
-        #Get the post parameters
-        loginusername = request.POST['loginusername']
-        loginusername=loginusername+'@nitt.edu'
-        loginpassword = request.POST['loginpassword']
-        user =EmailBackEnd.authenticate(request, username=loginusername, password=loginpassword)      
+        # Get the post parameters
+        loginusername = request.POST["loginusername"]
+        loginusername = loginusername + "@nitt.edu"
+        loginpassword = request.POST["loginpassword"]
+        user = EmailBackEnd.authenticate(
+            request, username=loginusername, password=loginpassword
+        )
         if user is not None:
             login(request, user)
             messages.success(request, "Successfuly logged in 🥰")
@@ -77,44 +135,13 @@ def handleLogin(request):
             messages.error(request, "Invalid credentialsl, Please try again 😎")
             return redirect(views.homeView)
 
-def password_reset_request(request):
-	if request.method == "POST":
-		password_reset_form = PasswordResetForm(request.POST)
-		if password_reset_form.is_valid():
-			data = password_reset_form.cleaned_data['email']
-            
-			associated_users = User.objects.filter(Q(email=data))
-			if associated_users.exists():
-				for user in associated_users:
-					subject = "Password Reset Requested"
-					email_template_name = "password/password_reset_email.txt"
-					c = {
-					"email":user.email,
-					'domain':'127.0.0.1:8000',
-					'site_name': 'Website',
-					"uid": urlsafe_base64_encode(force_bytes(user.pk)),
-					'token': default_token_generator.make_token(user),
-					'protocol': 'http',
-					}
-					email = render_to_string(email_template_name, c)
-					try:
-						send_mail(subject, email, 'anupkumarmridha.net@gmail.com' , [user.email], fail_silently=False)
-					except BadHeaderError:
-
-						return HttpResponse('Invalid header found.')
-						
-					messages.success(request, 'A message with reset password instructions has been sent to your inbox.')
-					return redirect (views.homeView)
-			messages.error(request, 'An invalid email has been entered.')
-	password_reset_form = PasswordResetForm()
-	return render(request=request, template_name="password/password_reset.html", context={"password_reset_form":password_reset_form})
 
 def handleLogout(request):
-    if request.method=='POST':
-        value=request.POST['value']
+    if request.method == "POST":
+        value = request.POST["value"]
         logout(request)
         messages.success(request, "Successfuly logged out 🥰")
-        
+
         return redirect(views.homeView)
     else:
-        return HttpResponse('Sorry No Users Logged in 😎') 
+        return HttpResponse("Sorry No Users Logged in 😎")
