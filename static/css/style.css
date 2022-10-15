@@ -221,3 +221,38 @@ input[type=number]::-webkit-outer-spin-button {
     text-decoration: none;
     padding: 1rem 0;
 }
+
+.custom {
+    width: 230px;
+    top: 0;
+    left: 0;
+    border-right: 1px solid rgba(0,0,0,.2);
+    position: fixed;
+    bottom: 0;
+    z-index: 1045;
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+    background-color: #fff;
+    background-clip: padding-box;
+    outline: 0;
+    transition: transform .3s ease-in-out;
+}
+
+.custom-header {
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    padding: 1rem 1rem;
+}
+
+.custom-title {
+    margin-bottom: 0;
+    line-height: 1.5;
+}
+
+.custom-body {
+    flex-grow: 1;
+    padding: 1rem 1rem;
+    overflow-y: auto;
+}
