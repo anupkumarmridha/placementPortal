@@ -46,8 +46,8 @@ class InterviewExperience(models.Model):
         return str(self.user) + ' | ' + str( self.company)
     
 class Selection(models.Model):
-    student = models.OneToOneField(Student, on_delete = models.CASCADE)
-    job = models.OneToOneField(Job, on_delete = models.CASCADE)
+    student = models.ForeignKey(Student, on_delete = models.CASCADE)
+    job = models.ForeignKey(Job, on_delete = models.CASCADE)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
