@@ -95,7 +95,7 @@ def addJob(request):
     else:
         return HttpResponse("404 - Not Found")
 
-def updateJob(request):
+def updateJobStatus(request):
     if(request.method=='POST'):
         company=request.POST.get('company')
         role=request.POST.get('role')

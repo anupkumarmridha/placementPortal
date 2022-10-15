@@ -14,7 +14,7 @@ urlpatterns = [
   path("password_change", resetPasswordView.password_change, name="password_change"),
   path("password_reset", resetPasswordView.password_reset_request, name="password_reset"),
   path('reset/<uidb64>/<token>', resetPasswordView.passwordResetConfirm, name='password_reset_confirm'),
-  path('/addStudentProfileDetails/', studentView.addStudentProfileDetails, name='addStudentProfileDetails'),
-  path('/updateStudentProfileDetails/',studentView.updateStudentProfileDetails, name='updateStudentProfileDetails'),
+  path('/addStudentBasicProfileDetails/', studentView.addStudentBasicProfileDetails, name='addStudentBasicProfileDetails'),
+  path('/updateStudentBasicProfileDetails/',studentView.updateStudentBasicProfileDetails, name='StudentBasicProfileDetails'),
 #   path('/admin', views.company_home, name='admin_home'),
 ]

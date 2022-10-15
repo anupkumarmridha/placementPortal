@@ -8,10 +8,8 @@ from home import views
 from accounts.EmailBackEnd import EmailBackEnd
 from django.contrib.auth import authenticate, login, logout
 
-def addStudentProfileDetails(request):
+def addStudentBasicProfileDetails(request):
     if request.method=='POST':
-        name=request.POST['name']
-        roll=request.POST['roll']
         personalEmail=request.POST['personalEmail']
         dept=request.POST['dept']
         cgpa=request.POST['cgpa']
@@ -42,5 +40,5 @@ def addStudentProfileDetails(request):
     else:
         return HttpResponse("404 - Not Found")
 
-def updateStudentProfileDetails(request):
+def updateStudentBasicProfileDetails(request):
     pass

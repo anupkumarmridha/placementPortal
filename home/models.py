@@ -20,7 +20,7 @@ class Job(models.Model):
     company = models.ForeignKey(Company, on_delete = models.CASCADE)
     role = models.CharField(max_length = 255)
     description = models.TextField()
-    ctc = models.CharField(max_length = 10)
+    ctc = models.DecimalField(max_digits = 10, decimal_places = 2)
     profile = models.CharField(max_length = 255)
     location = models.CharField(max_length = 500)
     
@@ -51,13 +51,17 @@ class Selection(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    def __str__(self):
+        return str(self.student) + ' | ' + str( self.job)
 
 class StudentJob(models.Model):
     student = models.ForeignKey(Student, on_delete = models.CASCADE)
     job = models.ForeignKey(Job, on_delete = models.CASCADE)
-    round = models.CharField(max_length=100)
+    rounds = models.CharField(max_length=100)
     verdict_choice = (('Selected',"Selected"),('Under Review',"Under Review"), ('Rejected', "Rejected"), ('Selected For Next Round', "Selected For Next Round"))
-    verdict = models.CharField(choices=verdict_choice, max_length=20)
+    verdict = models.CharField(choices=verdict_choice, max_length=255)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    def __str__(self):
+        return str(self.student) + ' | ' + str( self.rounds) + '|' + str(self.verdict)
