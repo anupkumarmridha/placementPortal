@@ -40,7 +40,7 @@ class Student(models.Model):
 
 class EducationDetails(models.Model):
 
-    student= models.ForeignKey(Student, on_delete = models.CASCADE)
+    student= models.OneToOneField(Student, on_delete = models.CASCADE)
     roll=models.CharField(max_length=9, unique=True)
     
     degreeLevelChoice=(('UG',"UG"),('PG',"PG"))
@@ -53,10 +53,10 @@ class EducationDetails(models.Model):
     class10Percentage=models.DecimalField(max_digits=5, decimal_places=2)
     class12Percentage=models.DecimalField(max_digits=5, decimal_places=2)
     
-    ugDegree=models.CharField(max_length=255, blank=True, null=True)
+    ugDegree=models.CharField(max_length=500, blank=True, null=True)
     ugCgpa=models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
-    ugCollage=models.CharField(max_length=5, blank=True, null=True)
+    ugCollege=models.CharField(max_length=500, blank=True, null=True)
     ugGraduationYear=models.DateField(blank=True, null=True)
     resume= models.FileField(null=True, blank=True, upload_to='PDF/Students/resume/')
     def __str__(self):
-        return str(self.user)
+        return str(self.student)

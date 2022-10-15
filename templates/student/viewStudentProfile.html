@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}View Student Details{% endblock title %}
+{% block body %}
+<h1>Profile Details</h1>
+{% for item in details %}
+    {% comment %} <h3><a class="dropdown-item" href="{% url 'category' cats|slugify %}">{{ cats }}</a></h3> {% endcomment %}
+    
+{% endfor %}
+{% endblock body %}
