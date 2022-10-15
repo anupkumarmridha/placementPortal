@@ -12,16 +12,19 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 import os
-
+import environ
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+
+# Take environment variables from .env file
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-ikmr(h7apexa)j01)6fr1-z4e=g)p+_w*nkl6%yk9h)fp&1$^&'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -137,6 +140,18 @@ MEDIA_ROOT=os.path.join(BASE_DIR,"media")
 #added manually
 AUTHENTICATION_BACKENDS=['accounts.EmailBackEnd.EmailBackEnd']
 AUTH_USER_MODEL='accounts.User'
+
+# Emailing settings
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_FROM = 'doremonmax2018@gmail.com'
+EMAIL_HOST_USER = 'doremonmax2018@gmail.com'
+EMAIL_HOST_PASSWORD = 'hosoqgrwezrszipv '
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+PASSWORD_RESET_TIMEOUT = 14400
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
