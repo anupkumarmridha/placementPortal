@@ -100,11 +100,11 @@ def handelSingup(request):
                 last_name=lname,
                 user_type=user_type,
             )
-            myuser.is_active = False
+            # myuser.is_active = False
             myuser.save()
             
             # print("here")
-            activateEmail(request, myuser, email)
+            # activateEmail(request, myuser, email)
             messages.success(request, "Account Created Successfully!")
             return redirect(views.homeView)
 
