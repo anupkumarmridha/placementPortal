@@ -9,8 +9,15 @@
     <li class="sidenav-list-item"><i class="bi bi-person-fill"></i> <a href= "{% url 'viewStudentProfile' %}" class="dash-link">Profile</a></li>
     <li class="sidenav-list-item"><i class="bi bi-cloud-upload"></i> <a href="#" class="dash-link">Update Resume</a>
     </li>
-    <li class="sidenav-list-item"><i class="bi bi-list-ul"></i> <a href="#" class="dash-link">Companies</a></li>
+    <li class="sidenav-list-item"><i class="bi bi-list-ul"></i> <a href="{% url 'companies' %}" class="dash-link">Companies</a></li>
+
     <li class="sidenav-list-item"><i class="bi bi-key-fill"></i> <a href="#" class="dash-link">Change Password</a>   </li>
+    
+    {% if user.student.isPR %}
+    <li class="sidenav-list-item"><i class="bi bi-key-fill"></i> <a href="{% url 'addCompany' %}" class="dash-link">Add Company</a>   </li>
+    {% endif %}
+
+
     <ul class="login-btns">
       <li class="sidenav-list-item"> <a class="dash-link">
         <form action='{% url 'handleLogout' %}' method='post'>

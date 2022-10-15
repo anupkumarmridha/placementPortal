@@ -3,9 +3,10 @@ from accounts.models import User, Student
 from home.models import Company, Job, InterviewExperience, Selection, StudentJob
 from django.contrib import messages
 from django.shortcuts import render, HttpResponse, redirect , HttpResponseRedirect
-
+from home.forms import addCompanyForm, updateCompanyForm
 from home import views 
-
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy, reverse
 # Create your views here.
 def homeView(request):
     return render(request,'home/index.html')
@@ -14,49 +15,81 @@ def homeView(request):
 
 #only by PR
 def addCompany(request):
-    if(request.method=='POST'):
-        companyName=request.POST.get('companyName')
-        companyType=request.POST.get('companyType')
-        companyCategory=request.POST.get('companyCategory')
-        try:
-            user=request.user
-            student=Student.objects.get(user=user)
-            if(student.isPR):
-                company = Company(companyName=companyName, companyType=companyType, companyCategory=companyCategory)
-                company.save()
-                messages.success(request, "company successfully added!")
-                return redirect('viewAllCompany')
-            else:
-                messages.error("Only PR can add company details!")
-
-        except Exception as e:
-            messages.success(request, "failed to add company!")
-    else:
-        return HttpResponse("404 - Not Found")
-
-
-def updateCompany(request):
-    if(request.method=='POST'):
-        companyName=request.POST.get('companyName')
-        companyType=request.POST.get('companyType')
-        companyCategory=request.POST.get('companyCategory')
-        try:
-            user=request.user
-            student=Student.objects.get(user=user)
-            company=Company.objects.filter(companyName=companyName)
-            if(student.isPR):
-                company = Company(companyName=companyName, companyType=companyType, companyCategory=companyCategory)
-                company.save()
-                messages.success(request, "company successfully updated")
-                return redirect('viewAllCompany')
-            else:
-                messages.error("Only PR can add company details")
-
-        except Exception as e:
-            messages.success(request, "failed to add company")
+    
+    if request.method=='POST':
         
+        try:
+            user=request.user
+            student=Student.objects.get(user=user)
+            if(student.isPR):
+                form=addCompanyForm(request.POST, request.FILES)
+                if form.is_valid():
+                    form.save()
+                    messages.success(request, "Company info added successfully")
+                    return redirect('homeView')
+                else:
+                    messages.error(request, "Form is Not Valid")
+        except Exception as e:
+            print(e)
     else:
-        return HttpResponse("404 - Not Found")
+        form=addCompanyForm()
+    context={
+        'form':form
+        }
+    return render(request,'home/addCompany.html',context=context)
+
+class updateCompany(UpdateView):
+    model=Company
+    form_class=updateCompanyForm
+    template_name='home/updateCompany.html'
+    def get_success_url(self):
+        return reverse( 'homeView')
+
+
+# def addCompany(request):
+#     if(request.method=='POST'):
+#         companyName=request.POST.get('companyName')
+#         companyType=request.POST.get('companyType')
+#         companyCategory=request.POST.get('companyCategory')
+#         try:
+#             user=request.user
+#             student=Student.objects.get(user=user)
+#             if(student.isPR):
+#                 company = Company(companyName=companyName, companyType=companyType, companyCategory=companyCategory)
+#                 company.save()
+#                 messages.success(request, "company successfully added!")
+#                 return redirect('viewAllCompany')
+#             else:
+#                 messages.error("Only PR can add company details!")
+
+#         except Exception as e:
+#             messages.success(request, "failed to add company!")
+#     else:
+#         return HttpResponse("404 - Not Found")
+
+
+# def updateCompany(request):
+#     if(request.method=='POST'):
+#         companyName=request.POST.get('companyName')
+#         companyType=request.POST.get('companyType')
+#         companyCategory=request.POST.get('companyCategory')
+#         try:
+#             user=request.user
+#             student=Student.objects.get(user=user)
+#             company=Company.objects.filter(companyName=companyName)
+#             if(student.isPR):
+#                 company = Company(companyName=companyName, companyType=companyType, companyCategory=companyCategory)
+#                 company.save()
+#                 messages.success(request, "company successfully updated")
+#                 return redirect('viewAllCompany')
+#             else:
+#                 messages.error("Only PR can add company details")
+
+#         except Exception as e:
+#             messages.success(request, "failed to add company")
+        
+#     else:
+#         return HttpResponse("404 - Not Found")
 
 
 def viewCompany(request,companyName):
@@ -67,7 +100,7 @@ def viewAllCompany(request):
     companies=Company.objects.all()
     context={'companies':companies}
     #print(request.path_info)
-    return HttpResponseRedirect(request.path_info, context)
+    return render(request,'home/companies.html',context=context)
 
 def deleteCompany(request):
     pass

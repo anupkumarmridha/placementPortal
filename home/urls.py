@@ -3,6 +3,9 @@ from home import views
 
 urlpatterns = [
     path('', views.homeView, name='homeView'),
-    path('/addJob', views.addJob, name='addJob'),
-    path('/updateJobStatus', views.updateJobStatus, name='updateJobStatus'),
+    path('addCompany', views.addCompany, name='addCompany'),
+    path('updateCompany/<int:pk>', views.addCompany, name='updateCompany'),
+    path('companies', views.viewAllCompany, name='companies'),
+
+    path('updateJobStatus', views.updateJobStatus, name='updateJobStatus'),
     ]

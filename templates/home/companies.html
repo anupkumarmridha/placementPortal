@@ -1,0 +1,32 @@
+{% extends 'base.html' %} 
+{% load static %}
+{% block title %}Update Resume - Placement, NITT{% endblock title %} 
+
+{% block body %}
+    <div class="container-fluid">
+        <table class="table table-striped table-hover table-info overflow-auto">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Category</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if companies %}
+                {% for com in companies %}
+                <tr>
+                    <td><a href="#">{{ com.companyName }}</a></td>
+                    <td>{{ com.companyType }}</td>
+                    <td>{{ com.companyCategory }}</td>
+                    <td>{{ com.companyDesc | slice:':120' | safe }}</td>
+                </tr>
+                {% endfor %}
+                {% else %}
+                No companies available
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+{% endblock body %}

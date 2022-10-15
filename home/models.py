@@ -1,6 +1,7 @@
 from unittest.util import _MAX_LENGTH
 from django.db import models
 from accounts.models import User, Student
+from ckeditor.fields import RichTextField
 # Create your models here.
 
 class Company(models.Model):
@@ -9,6 +10,8 @@ class Company(models.Model):
     companyType=models.CharField(max_length=255)
     #hardware / software
     companyCategory=models.CharField(max_length=255)
+
+    companyDesc=RichTextField(blank=True, null=True)
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)
 
@@ -19,7 +22,7 @@ class Company(models.Model):
 class Job(models.Model):
     company = models.ForeignKey(Company, on_delete = models.CASCADE)
     role = models.CharField(max_length = 255)
-    description = models.TextField()
+    description = RichTextField(blank=True, null=True)
     ctc = models.DecimalField(max_digits = 10, decimal_places = 2)
     profile = models.CharField(max_length = 255)
     location = models.CharField(max_length = 500)
@@ -38,7 +41,7 @@ class InterviewExperience(models.Model):
     user=models.ForeignKey(User, on_delete = models.CASCADE)
     company=models.ForeignKey(Company, on_delete = models.CASCADE)
     jobProfile=models.CharField(max_length=500)
-    experience=models.TextField()
+    experience=RichTextField(blank=True, null=True)
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)
 
