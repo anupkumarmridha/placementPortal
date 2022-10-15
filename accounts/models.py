@@ -17,6 +17,8 @@ class Student(models.Model):
     profile_pic = models.ImageField(null=True, blank=True,upload_to='images/Students/profile/')
     dob = models.DateField()
     
+    isSelected = models.BooleanField(default=False)
+    
     homeAddress = models.TextField()
     localAddress = models.TextField()
     job_choice=(('Intern',"Internship"),('Placements',"Placements"))

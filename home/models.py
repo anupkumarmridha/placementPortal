@@ -1,6 +1,6 @@
 from unittest.util import _MAX_LENGTH
 from django.db import models
-from accounts.models import User
+from accounts.models import User, Student
 # Create your models here.
 
 class Company(models.Model):
@@ -23,6 +23,10 @@ class Job(models.Model):
     ctc = models.CharField(max_length = 10)
     profile = models.CharField(max_length = 255)
     location = models.CharField(max_length = 500)
+    
+    open = models.BooleanField(default=False)
+    pr = models.ForeignKey(Student, on_delete = models.CASCADE)
+
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)
     #company requirement details
@@ -40,5 +44,10 @@ class InterviewExperience(models.Model):
 
     def __str__(self):
         return str(self.user) + ' | ' + str( self.company)
+    
+class Selection(models.Model):
+    student = models.OneToOneField(Student, on_delete = models.CASCADE)
+    job = models.OneToOneField(Job, on_delete = models.CASCADE)
 
-
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
