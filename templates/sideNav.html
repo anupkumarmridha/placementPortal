@@ -6,7 +6,24 @@
   <div class="offcanvas-body">
     <ul class="sidenav-list">
       {% if user.is_authenticated %}
+    <li class="sidenav-list-item"><i class="bi bi-person-fill"></i> <a href= "{% url 'viewStudentProfile' %}" class="dash-link">Profile</a></li>
+    <li class="sidenav-list-item"><i class="bi bi-cloud-upload"></i> <a href="#" class="dash-link">Update Resume</a>
+    </li>
+    <li class="sidenav-list-item"><i class="bi bi-list-ul"></i> <a href="#" class="dash-link">Companies</a></li>
+    <li class="sidenav-list-item"><i class="bi bi-key-fill"></i> <a href="#" class="dash-link">Change Password</a>   </li>
+    <ul class="login-btns">
+      <li class="sidenav-list-item"> <a class="dash-link">
+        <form action='{% url 'handleLogout' %}' method='post'>
+          {% csrf_token %}
+          <div class="form-group">
+              <input type="hidden" name="value">
+          </div>
 
+          <button class="dropdown-item" type="submit"><i class="bi bi-power" style="margin-right:10px;"></i>Logout</button>
+      </form>
+      </a></li>
+    </ul>
+  </ul>
       {% else %}
       <!-- Button to trigger login modal -->
       <ul class="login-btns">
@@ -23,14 +40,9 @@
           </button>
         </li>
         
-      </ul>
-      <li class="sidenav-list-item"><i class="bi bi-person-fill"></i> <a href= "{% url 'viewStudentProfile' %}" class="dash-link">Profile</a></li>
-      <li class="sidenav-list-item"><i class="bi bi-cloud-upload"></i> <a href="#" class="dash-link">Update Resume</a>
-      </li>
-      <li class="sidenav-list-item"><i class="bi bi-list-ul"></i> <a href="#" class="dash-link">Companies</a></li>
-      <li class="sidenav-list-item"><i class="bi bi-key-fill"></i> <a href="#" class="dash-link">Change Password</a>
-      </li>
-      <li class="sidenav-list-item"><i class="bi bi-power"></i> <a href="#" class="dash-link">Logout</a></li>
+
+      
+
       
       {% comment %} <a class="nav-link" type="button" class="btn btn-danger mr-2"
         href="{% url 'register' %}">Register</a> {% endcomment %}
