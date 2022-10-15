@@ -75,6 +75,9 @@ def handelSingup(request):
     if request.method == "POST":
         # Get the post parameters
         username = request.POST["username"]
+        if(len(username)!=9):
+            messages.error(request, "Password do not match.")
+            return redirect("handelSingup")
         fname = request.POST["fname"]
         lname = request.POST["lname"]
         webMail = username + "@nitt.edu"
@@ -158,5 +161,6 @@ def changePassword(request):
                 user=request.user
                 user.set_password(pass1)
                 user.save()
+                messages.success(request, "password changed successful")
             except exception as e:
                 messages.error(request, "problem arise .")
