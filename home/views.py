@@ -1,6 +1,6 @@
 from urllib import response
 from accounts.models import User, Student
-from home.models import Company, Job, InterviewExperience, Selection
+from home.models import Company, Job, InterviewExperience, Selection, StudentJob
 from django.contrib import messages
 from django.shortcuts import render, HttpResponse, redirect , HttpResponseRedirect
 
@@ -120,7 +120,15 @@ def updateJob(request):
         return HttpResponse("404 - Not Found")
 
 def viewJob(request):
-    pass
+    if request.method == 'GET':
+        id = request.GET.get('q', '')
+        try:
+            job = Job.objects.filter(id=id)
+            return HttpResponse(job)
+        except:
+            return HttpResponse('5XX - Some Error Occured')
+    else:
+        return HttpResponse('404 - NOT FOUND')
 
 def viewAllJob(request):
     jobs=Job.objects.all()
@@ -129,22 +137,122 @@ def viewAllJob(request):
     return HttpResponseRedirect(request.path_info, context)
 
 def deleteJob(request):
-    pass
+    if request.method == 'DELETE':
+        id = request.GET.get('q', '')
+        try:
+            user=request.user
+            student=Student.objects.get(user=user)
+            if student.isPR == False:
+                return HttpResponse('403 - Only PRs can delete Jobs')
+            Job.objects.filter(id=id).delete()
+            return HttpResponse('Deleted Successfully')
+        except:
+            return HttpResponse('5XX - Some Error Occured')
+    else:
+        return HttpResponse('404 - NOT FOUND')
 
 
 #all students
-def addInterviewExperience(request):
-    pass
+def interviewExperience(request):
+    if request.method=='POST':
+        company=request.POST.get('company')
+        experience=request.POST.get('experience')
+        jobProfile=request.POST.get('jobProfile')
+        try:
+            user=request.user
+            student=Student.objects.get(user=user)
+            interviewExperience = InterviewExperience(company=company,jobProfile=jobProfile,experience=experience,user=student)
+            interviewExperience.save()
+            messages.success(request, "Job successfully added!")
+            return redirect('getAllInterviewExperience')
 
-def updateInterviewExperience(request):
-    pass
+        except Exception as e:
+            messages.success(request, "failed to add job!")
+    elif request.method=='PUT':
+        company=request.PUT.get('company')
+        experience=request.PUT.get('experience')
+        jobProfile=request.PUT.get('jobProfile')
+        id=request.PUT['id']
+        try:
+            user=request.user
+            student=Student.objects.get(user=user)
+            interview = InterviewExperience.objects.filter(id=id)
+            if interview.user != user:
+                messages.success(request, "You are unauthorized")
+                return HttpResponse("403 - Unauthorized Access")
+            interview.update(company=company,jobProfile=jobProfile,experience=experience,user=student)
+            interview.save()
+            messages.success(request, "Job successfully updated!")
+            return redirect('getAllInterviewExperience')
 
-def getInterviewExperience(request):
-    pass
+        except Exception as e:
+            messages.success(request, "failed to add job!")
+    elif request.method == 'GET':
+        id = request.GET.get('q', '')
+        try:
+            interview = InterviewExperience.objects.filter(id=id)
+            return HttpResponse(interview)
+        except:
+            return HttpResponse('Some Error Occured')
+    elif request.method == 'DELETE':
+        id = request.GET.get('q', '')
+        try:
+            InterviewExperience.objects.filter(id=id).delete()
+            return HttpResponse('Deleted Successfully')
+        except:
+            return HttpResponse('Some Error Occured')
+    else:
+        return HttpResponse("404 - Not Found")
 
 
 def getAllInterviewExperience(request):
-    pass
+    if request.method == 'GET':
+        try:
+            interviews = InterviewExperience.objects.all()
+            return HttpResponse(interviews)
+        except:
+            return HttpResponse('Some Error occured')
+    else:
+        return HttpResponse('404 - Not Found')    
 
-def deleteInterviewExperience(request):
-    pass
+# add in studentJob
+def addStudentJob(request):
+    if request.method == 'POST':
+        job = request.POST['job']
+        student = request.POST['student']
+        round = request.POST['round']
+        try:
+            user=request.user
+            stu=Student.objects.get(user=user)
+            if stu.isPR==False:
+                return HttpResponse('403 - Unauthorized')
+            studentJob = StudentJob.objects.create(job=job, student=student, round=round)
+            return HttpResponse(studentJob)
+        except:
+            return HttpResponse('Some Error Occured')
+    elif request.method == 'PUT':
+        job = request.PUT['job']
+        student = request.PUT['student']
+        round = request.PUT['round']
+        status = request.PUT['status']
+        try:
+            user=request.user
+            stu=Student.objects.get(user=user)
+            if stu.isPR==False:
+                return HttpResponse('403 - Unauthorized')
+            studentJob = StudentJob.objects.filter(job=job, student=student, round=round).update(status=status)
+            if status == 'Selected':
+                Selection.objects.create(student=student, job=job)
+            return HttpResponse(studentJob)
+        except:
+            return HttpResponse('Some Error Occured')
+    else:
+        return HttpResponse('404 - Not Found')
+
+
+
+#Placement Status for students
+#Company -> open / closed, JD, registration link, upload resume/download resume
+
+#PR-> Company -> convince close /open PPT OT PI time slot venue shortlisted candidates selected candidates 
+#csv file for the students who attempted OT
