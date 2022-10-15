@@ -274,3 +274,11 @@ div.sw-toolbar-elm.toolbar.toolbar-bottom {
     padding: 1rem 1rem;
     overflow-y: auto;
 }
+
+.profile-options button:hover {
+    color: white;
+}
+
+.profile-options button:focus {
+    color: white;
+}
