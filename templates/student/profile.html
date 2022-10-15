@@ -1,55 +1,241 @@
-{% extends 'base.html' %} 
+{% extends 'base.html' %}
 {% load static %}
-{% block title %}Profile - Placement, NITT{% endblock title %} 
+{% block title %}Profile - Placement, NITT{% endblock title %}
 
 {% block body %}
-    <div class="container-fluid">
-        <div class="profile-header">
+<div class="container-fluid">
+    <div class="profile-header">
+        <div class="profile-options">
             <h4 class="h-4">Welcome, Bhushan Mendhe</h4>
-            <img src="{% static "img/Bhushan.jpg" %}" alt="No image found!" class="profile-img img-fluid" type="image">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updateDetailsModal">
+                Update Profile
+            </button>
         </div>
-        <div class="profile-details table-hover table-responsive">
-            <table class="table">
-                <thead></thead>
-                <tbody>
-                    {% for detail in data %}
-                        <tr class="profile-item">
-                            <td class="profile-item-label">{{detail.0}}</td>
-                            <td>:</td>
-                            <td class="profile-item-content">{{detail.1}}</td>
-                        </tr>
-                    {% endfor %}
-                    {% for detail in data %}
-                        <tr class="profile-item">
-                            <td class="profile-item-label">{{detail.0}}</td>
-                            <td>:</td>
-                            <td class="profile-item-content">{{detail.1}}</td>
-                        </tr>
-                    {% endfor %}
-                    {% for detail in data %}
-                        <tr class="profile-item">
-                            <td class="profile-item-label">{{detail.0}}</td>
-                            <td>:</td>
-                            <td class="profile-item-content">{{detail.1}}</td>
-                        </tr>
-                    {% endfor %}
-                    {% for detail in data %}
-                        <tr class="profile-item">
-                            <td class="profile-item-label">{{detail.0}}</td>
-                            <td>:</td>
-                            <td class="profile-item-content">{{detail.1}}</td>
-                        </tr>
-                    {% endfor %}
-                    {% for detail in data %}
-                        <tr class="profile-item">
-                            <td class="profile-item-label">{{detail.0}}</td>
-                            <td>:</td>
-                            <td class="profile-item-content">{{detail.1}}</td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-            
+
+        <img src="{% static "img/Bhushan.jpg" %}" alt="No image found!" class="profile-img img-fluid" type="image">
+    </div>
+    <div class="profile-details table-hover table-responsive">
+        <table class="table">
+            <thead></thead>
+            <tbody>
+                {% for detail in data %}
+                <tr class="profile-item">
+                    <td class="profile-item-label">{{detail.0}}</td>
+                    <td>:</td>
+                    <td class="profile-item-content">{{detail.1}}</td>
+                </tr>
+                {% endfor %}
+                {% for detail in data %}
+                <tr class="profile-item">
+                    <td class="profile-item-label">{{detail.0}}</td>
+                    <td>:</td>
+                    <td class="profile-item-content">{{detail.1}}</td>
+                </tr>
+                {% endfor %}
+                {% for detail in data %}
+                <tr class="profile-item">
+                    <td class="profile-item-label">{{detail.0}}</td>
+                    <td>:</td>
+                    <td class="profile-item-content">{{detail.1}}</td>
+                </tr>
+                {% endfor %}
+                {% for detail in data %}
+                <tr class="profile-item">
+                    <td class="profile-item-label">{{detail.0}}</td>
+                    <td>:</td>
+                    <td class="profile-item-content">{{detail.1}}</td>
+                </tr>
+                {% endfor %}
+                {% for detail in data %}
+                <tr class="profile-item">
+                    <td class="profile-item-label">{{detail.0}}</td>
+                    <td>:</td>
+                    <td class="profile-item-content">{{detail.1}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="container">
+    <!-- Modal -->
+    <div class="modal fade" id="updateDetailsModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Update Details</h5> <button type="button"
+                        class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- SmartWizard html -->
+                    <div id="smartwizard">
+                        <ul class="nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#step-1">
+                                    <div class="num">1</div>
+                                    Basic Details
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#step-2">
+                                    <span class="num">2</span>
+                                    Personal Details
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#step-3">
+                                    <span class="num">3</span>
+                                    Academic Details
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " href="#step-4">
+                                    <span class="num">4</span>
+                                    Documents
+                                </a>
+                            </li>
+                        </ul>
+
+                        <form action="">
+                            <div class="tab-content" style="padding: 1rem;">
+                            
+                                <div id="step-1" class="tab-pane" role="tabpanel" aria-labelledby="step-1">
+                                    <div class="mb-3">
+                                        <label for="fname" class="form-label">First Name</label>
+                                        <input type="text" class="form-control" id="fname" placeholder="">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="lname" class="form-label">Last Name</label>
+                                        <input type="text" class="form-control" id="lname" placeholder="">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="rollno" class="form-label">Roll Number</label>
+                                        <input type="number" class="form-control" id="roll" placeholder="">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="email" class="form-label">Email address</label>
+                                        <input type="email" class="form-control" id="email" placeholder="name@example.com">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="lname" class="form-label">Gender</label>
+                                        <select class="form-select" aria-label="Default select example">
+                                            <option selected>Select Gender</option>
+                                            <option value="male">Male</option>
+                                            <option value="female">Female</option>
+                                            <option value="others">Others</option>
+                                          </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="profile-pic" class="form-label">Profile Picture</label>
+                                        <input type="file" class="form-control" id="profile-pic">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="dob" class="form-label">Date-of-birth</label>
+                                        <input type="date" class="form-control" id="dob">
+                                    </div>
+                                </div>
+                                <div id="step-2" class="tab-pane" role="tabpanel" aria-labelledby="step-2">
+                                    <div class="mb-3">
+                                        <label for="father" class="form-label">Father Name</label>
+                                        <input type="text" class="form-control" id="father" placeholder="Father's Name">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="mother" class="form-label">Mother Name</label>
+                                        <input type="text" class="form-control" id="mother" placeholder="Mother's Name">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="phone" class="form-label">Phone Number</label>
+                                        <input type="tel" class="form-control" id="phone" placeholder="">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="gphone" class="form-label">Guardian Number</label>
+                                        <input type="tel" class="form-control" id="gphone" placeholder="">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="permAdd" class="form-label">Permanent Address</label>
+                                        <input type="text" class="form-control" id="permAdd" placeholder="">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="currAdd" class="form-label">Current Address</label>
+                                        <input type="text" class="form-control" id="currAdd" placeholder="">
+                                    </div>
+                                </div>
+                                <div id="step-3" class="tab-pane" role="tabpanel" aria-labelledby="step-3">
+                                    <div class="mb-3">
+                                        <label for="degree" class="form-label">Degree Level</label>
+                                        <select class="form-select" aria-label="Default select example">
+                                            <option selected>Select Degree</option>
+                                            <option value="ug">Under-Graduate</option>
+                                            <option value="pg">Post-Graduate</option>
+                                          </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="dept" class="form-label">Department</label>
+                                        <input type="text" class="form-control" id="dept" placeholder="Department">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="course" class="form-label">Course</label>
+                                        <input type="text" class="form-control" id="course" placeholder="Course">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="cgpa" class="form-label">CGPA</label>
+                                        <input type="number" class="form-control" id="cgpa" placeholder="">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="grad-year" class="form-label">Graduation Year</label>
+                                        <input type="number" class="form-control" id="grad-year">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="10percent" class="form-label">10th Percentage</label>
+                                        <input type="number" class="form-control" id="10percent">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="12percent" class="form-label">12th Percentage</label>
+                                        <input type="number" class="form-control" id="12percent">
+                                    </div>
+                                    <!-- Option only for PG Guys -->
+                                    <div class="mb-3">
+                                        <label for="ugrad-percent" class="form-label">Graduation Percentage</label>
+                                        <input type="number" class="form-control" id="ugrad-percent">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="ugrad-degree" class="form-label">Graduation Degree</label>
+                                        <input type="text" class="form-control" id="ugrad-degree">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="ugrad-percent" class="form-label">Graduation Percentage</label>
+                                        <input type="number" class="form-control" id="ugrad-percent">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="ugrad-college" class="form-label">Graduation College</label>
+                                        <input type="text" class="form-control" id="ugrad-college">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="ugrad-year" class="form-label">Graduation Year</label>
+                                        <input type="number" class="form-control" id="ugrad-year">
+                                    </div>
+                                </div>
+                                <div id="step-4" class="tab-pane" role="tabpanel" aria-labelledby="step-4">
+                                    <div class="mb-3">
+                                        <label for="resume" class="form-label">Resume</label>
+                                        <input type="file" class="form-control" id="resume">
+                                    </div>
+                                    <input class="btn btn-primary form-submit" type="submit" value="Submit">
+                                </div>
+                            </div>
+                        </form>
+
+                        <!-- Include optional progressbar HTML -->
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="0"
+                                aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+</div>
 {% endblock body %}
