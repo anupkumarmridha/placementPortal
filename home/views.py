@@ -11,6 +11,7 @@ def homeView(request):
     return render(request,'home/index.html')
 
 
+
 #only by PR
 def addCompany(request):
     if(request.method=='POST'):
