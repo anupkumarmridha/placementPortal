@@ -1,3 +1,4 @@
+from logging import exception
 from django.shortcuts import render, HttpResponse, redirect
 
 from accounts.EmailBackEnd import EmailBackEnd
@@ -145,3 +146,17 @@ def handleLogout(request):
         return redirect(views.homeView)
     else:
         return HttpResponse("Sorry No Users Logged in 😎")
+
+def changePassword(request):
+    if request.method == "POST":
+        pass1 = request.POST["pass1"]
+        pass2 = request.POST["pass2"]
+        if pass1 != pass2:
+            messages.error(request, "Password do not match.")
+        else:
+            try:
+                user=request.user
+                user.set_password(pass1)
+                user.save()
+            except exception as e:
+                messages.error(request, "problem arise .")
