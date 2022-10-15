@@ -10,6 +10,8 @@ urlpatterns = [
   path('logout', views.handleLogout, name='handleLogout'),
   
   path('viewStudentProfile/',studentView.viewStudentProfile, name='viewStudentProfile'),
+  path('updateResume/',studentView.updateResume, name='updateResume'),
+
 
   # to reset password
   path('activate/<uidb64>/<token>', views.activate, name='activate'),

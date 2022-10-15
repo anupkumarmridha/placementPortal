@@ -233,3 +233,6 @@ def viewStudentProfile(request):
     except:
         messages.error(request, "Student profile not found")
     return render(request, "student/viewStudentProfile.html")
+
+def updateResume(request):
+    return render(request,'student/resume.html')

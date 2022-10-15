@@ -6,6 +6,5 @@ urlpatterns = [
     path('addCompany', views.addCompany, name='addCompany'),
     path('updateCompany/<int:pk>', views.addCompany, name='updateCompany'),
     path('companies', views.viewAllCompany, name='companies'),
-
     path('updateJobStatus', views.updateJobStatus, name='updateJobStatus'),
     ]
