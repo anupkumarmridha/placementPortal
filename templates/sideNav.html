@@ -9,14 +9,20 @@
 
       {% else %}
       <!-- Button to trigger login modal -->
-      <ul>
-        <button type="button" class="btn mr-2" data-toggle="modal" data-target="#loginModal">
-          Login
-        </button>
+      <ul class="login-btns">
+        <li class="login-btns-items">
+          <button type="button" class="btn " data-bs-toggle="modal" data-bs-target="#loginModal">
+            Login
+          </button>
+        </li>
+        
         <!-- Button to trigger singup modal -->
-        <button type="button" class="btn mr-2" data-toggle="modal" data-target="#singupModal">
-          Sign Up
-        </button>
+        <li class="login-btns-items">
+          <button type="button" class="btn " data-bs-toggle="modal" data-bs-target="#signupModal">
+            Sign up
+          </button>
+        </li>
+        
       </ul>
       <li class="sidenav-list-item"><i class="bi bi-person-fill"></i> <a href= "{% url 'viewStudentProfile' %}" class="dash-link">Profile</a></li>
       <li class="sidenav-list-item"><i class="bi bi-cloud-upload"></i> <a href="#" class="dash-link">Update Resume</a>
