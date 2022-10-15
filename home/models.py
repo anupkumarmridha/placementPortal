@@ -51,3 +51,13 @@ class Selection(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+class StudentJob(models.Model):
+    student = models.ForeignKey(Student, on_delete = models.CASCADE)
+    job = models.ForeignKey(Job, on_delete = models.CASCADE)
+    round = models.CharField(max_length=100)
+    verdict_choice = (('Selected',"Selected"),('Under Review',"Under Review"), ('Rejected', "Rejected"), ('Selected For Next Round', "Selected For Next Round"))
+    verdict = models.CharField(choices=verdict_choice, max_length=20)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)

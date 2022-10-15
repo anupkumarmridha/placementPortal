@@ -224,14 +224,3 @@ def getJobListing(request):
             return HttpResponse('5XX - Some Error Occured')
     else:
         return HttpResponse('404 - NOT FOUND')
-
-def getJD(request):
-    if request.method == 'GET':
-        id = request.GET.get('q', '')
-        try:
-            job = Job.objects.filter(id=id)
-            return HttpResponse(job)
-        except:
-            return HttpResponse('5XX - Some Error Occured')
-    else:
-        return HttpResponse('404 - NOT FOUND')
