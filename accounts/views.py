@@ -14,6 +14,9 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_str
 from django.core.mail import EmailMessage
 from typing import Protocol
+from django.urls import reverse_lazy, reverse
+from accounts.updateStudentForm import updateStudentDetails
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 # Create your views here.
 
@@ -224,3 +227,10 @@ def getJobListing(request):
             return HttpResponse('5XX - Some Error Occured')
     else:
         return HttpResponse('404 - NOT FOUND')
+
+class updateCompany(UpdateView):
+    model=Student
+    form_class=updateStudentDetails
+    template_name='home/updateDetails.html'
+    def get_success_url(self):
+        return reverse(views.homeViews)        
