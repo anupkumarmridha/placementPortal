@@ -10,23 +10,41 @@ class User(AbstractUser):
 
 class Student(models.Model):
     user = models.OneToOneField(User, on_delete = models.CASCADE)
-    roll=models.CharField(max_length=9, unique=True)
-    dept= models.CharField(max_length=255)
-    course= models.CharField(max_length=255)
-    graduationYear=models.DateField()
-    cgpa= models.DecimalField(max_digits=2, decimal_places=2)
-    resume= models.FileField(null=True, blank=True, upload_to='PDF/Students/resume/')
-    isPR=models.BooleanField(default=False)
-    isSelected=models.BooleanField(default=False)
-
+    phone=models.CharField(max_length=13, blank=True, null=True)
+    personalEmail= models.CharField(max_length=255, blank=True, null=True)
     gender_choice=(('M',"Male"),('F',"Female"))
     gender = models.CharField(choices=gender_choice, max_length=20)
     profile_pic = models.ImageField(null=True, blank=True,upload_to='images/Students/profile/')
-    phone = models.CharField(max_length=13)
     dob = models.DateField()
+    
+    isSelected = models.BooleanField(default=False)
     
     homeAddress = models.TextField()
     localAddress = models.TextField()
+    job_choice=(('Intern',"Internship"),('Placements',"Placements"))
+    jobType = models.CharField(choices=job_choice, max_length=20)
+
+    isPR=models.BooleanField(default=False)
+
+    fatherName=models.CharField(max_length=255, blank=True, null=True)
+    motherName=models.CharField(max_length=255, blank=True, null=True)
+    guardianPhone=models.CharField(max_length=13, blank=True, null=True)
+
+    roll=models.CharField(max_length=9, unique=True)
+    currentDept= models.CharField(max_length=255)
+    currentCourse= models.CharField(max_length=255)
+    currentCgpa= models.DecimalField(max_digits=2, decimal_places=2)
+    currentCourseGraduationYear=models.DateField()
+
+    class10Percentage=models.DecimalField(max_digits=2, decimal_places=2)
+    class12Percentage=models.DecimalField(max_digits=2, decimal_places=2)
+    graduationDegree=models.CharField(max_length=255, blank=True, null=True)
+    graduationCgpa=models.DecimalField(max_digits=2, decimal_places=2)
+    graduationCollage=models.CharField(max_length=255, blank=True, null=True)
+    collageGraduationYear=models.DateField()
+    
+
+    resume= models.FileField(null=True, blank=True, upload_to='PDF/Students/resume/')
     
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
