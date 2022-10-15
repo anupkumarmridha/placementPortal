@@ -22,6 +22,6 @@ admin.site.site_title="NIT TRICHY PLACEMENT PORTAL ADMIN PANEL"
 admin.site.index_title="WELCOME TO NIT TRICHY PLACEMENT PORTAL"
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('home.urls')),
-    path('accounts', include('accounts.urls')),
+    path('home/', include('home.urls')),
+    path('accounts/', include('accounts.urls')),
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

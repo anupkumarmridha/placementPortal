@@ -17,6 +17,7 @@ class Student(models.Model):
     cgpa= models.DecimalField(max_digits=2, decimal_places=2)
     resume= models.FileField(null=True, blank=True, upload_to='PDF/Students/resume/')
     isPR=models.BooleanField(default=False)
+    isSelected=models.BooleanField(default=False)
 
     gender_choice=(('M',"Male"),('F',"Female"))
     gender = models.CharField(choices=gender_choice, max_length=20)
