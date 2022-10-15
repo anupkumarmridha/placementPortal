@@ -1,52 +1,12 @@
 
 {% load static %}
 
-<<<<<<< HEAD
-<div class="modal fade" id="loginModal" role="dialog" aria-labelledby="loginModal" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="loginModalTitle">Login</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form action='{% url 'handleLogin' %}' method='post'>
-                    {% csrf_token %}
-                    <div class="form-group">
-                        <label for="username">Roll Number</label>
-                        <input type="text" class="form-control" id="loginusername" name="loginusername"
-                            placeholder="Enter your Email id" autocomplete="loginusername" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="pass">Password</label>
-                        <input type="password" class="form-control" id="loginpassword" name="loginpassword"
-                            placeholder="Enter your password " autocomplete="loginpassword" required>
-                    </div>
-                    <ul class="list-group">
-                        <li class="list-group-item">
-                            <a class="login-links" href= "{% url 'password_reset' %}">Forgot Password?<span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="list-group-item">
-                            <a class="login-links" href="" data-toggle="modal" data-target="#singupModal">Don't Have an Account?<span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="list-group-item">
-                            <button type="submit" class="btn btn-primary">Log in</button>
-                        </li>                       
-                    </ul>
-                </form>
-            </div>
-            
-=======
 <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
           <h1 class="modal-title fs-5" id="exampleModalLabel">Log in</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
->>>>>>> 259bc6f85ed1fbead08a5b873efe5c922e087298
         </div>
         <div class="modal-body">
             <form action='{% url 'handleLogin' %}' method='post'>
