@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+
 {% load static %}
 {% block title %}Profile - Placement, NITT{% endblock title %}
 
@@ -7,52 +7,160 @@
     <div class="profile-header">
         <div class="profile-options">
             <h4 class="h-4">Welcome, Bhushan Mendhe</h4>
+            {% if studentDetails %}
+            <a href="#" type="button" class="btn btn-primary" >
+                Update Profile
+            </a>
+            {% else %}
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updateDetailsModal">
                 Update Profile
             </button>
+            {% endif %}
         </div>
-
+        {% if user.profile.profile_pic %}
+        <img src="{{ user.student.profile_pic.url }}" class="rounded-circle"  width=75 height=75>
+    
+        {% else %}
+        
         <img src="{% static "img/Bhushan.jpg" %}" alt="No image found!" class="profile-img img-fluid" type="image">
+            
+        {% endif %}
+        
     </div>
     <div class="profile-details table-hover table-responsive">
         <table class="table">
             <thead></thead>
             <tbody>
-                {% for detail in data %}
+                {% if studentDetails %}
+                {% for item in studentDetails %}
                 <tr class="profile-item">
-                    <td class="profile-item-label">{{detail.0}}</td>
+                    <td class="profile-item-label">Roll</td>
                     <td>:</td>
-                    <td class="profile-item-content">{{detail.1}}</td>
+                    <td class="profile-item-content">{{user.username}}</td>
+                </tr>
+                
+                <tr class="profile-item">
+                    <td class="profile-item-label">Name</td>
+                    <td>:</td>
+                    <td class="profile-item-content">{{user.first_name}} {{user.last_name}}</td>
+                </tr>
+
+                <tr class="profile-item">
+                    <td class="profile-item-label">webmail</td>
+                    <td>:</td>
+                    <td class="profile-item-content">{{user.email}}</td>
+                </tr>
+                
+                <tr class="profile-item">
+                    <td class="profile-item-label">Phone</td>
+                    <td>:</td>
+                    <td class="profile-item-content">{{item.phone}}</td>
+                </tr>
+                <tr class="profile-item">
+                    <td class="profile-item-label">Gmail</td>
+                    <td>:</td>
+                    <td class="profile-item-content">{{item.personalEmail}}</td>
+                </tr>
+                
+                <tr class="profile-item">
+                    <td class="profile-item-label">Gender</td>
+                    <td>:</td>
+                    <td class="profile-item-content"> {{item.gender}}</td>
+                </tr>
+                <tr class="profile-item">
+                    <td class="profile-item-label">Dob</td>
+                    <td>:</td>
+                    <td class="profile-item-content">{{item.dob}}</td>
+                </tr>
+            
+                <tr class="profile-item">
+                    <td class="profile-item-label">Home Address </td>
+                    <td>:</td>
+                    <td class="profile-item-content"> {{item.homeAddress}}</td>
+                </tr>
+                <tr class="profile-item">
+                    <td class="profile-item-label">Local Address</td>
+                    <td>:</td>
+                    <td class="profile-item-content">{{item.localAddress}}</td>
+                </tr>
+                <tr class="profile-item">
+                    <td class="profile-item-label">Looking For</td>
+                    <td>:</td>
+                    <td class="profile-item-content">{{item.jobType}}</td>
+                </tr>
+                <tr class="profile-item">
+                    <td class="profile-item-label">Father Name</td>
+                    <td>:</td>
+                    <td class="profile-item-content">{{item.fatherName}}</td>
+                </tr>
+                <tr class="profile-item">
+                    <td class="profile-item-label">Mother Name</td>
+                    <td>:</td>
+                    <td class="profile-item-content">{{item.motherName}}</td>
+                </tr>
+                <tr class="profile-item">
+                    <td class="profile-item-label">Guardian Phone</td>
+                    <td>:</td>
+                    <td class="profile-item-content">{{item.guardianPhone}}</td>
+                </tr>
+                
+                <tr class="profile-item">
+                    <td class="profile-item-label">Degree Level</td>
+                    <td>:</td>
+                    <td class="profile-item-content">{{item.degreeLevel}}</td>
+                </tr>
+                <tr class="profile-item">
+                    <td class="profile-item-label">Department</td>
+                    <td>:</td>
+                    <td class="profile-item-content">{{item.currentDept}}</td>
+                </tr>
+                <tr class="profile-item">
+                    <td class="profile-item-label">Course</td>
+                    <td>:</td>
+                    <td class="profile-item-content">{{item.currentCourse}}</td>
+                </tr>
+                <tr class="profile-item">
+                    <td class="profile-item-label">CGPA</td>
+                    <td>:</td>
+                    <td class="profile-item-content">{{item.currentCgpa}}</td>
+                </tr>
+                <tr class="profile-item">
+                    <td class="profile-item-label">Graduation Year</td>
+                    <td>:</td>
+                    <td class="profile-item-content">{{item.currentCourseGraduationYear}}</td>
+                </tr>
+                <tr class="profile-item">
+                    <td class="profile-item-label">Class X CGPA/Percentage</td>
+                    <td>:</td>
+                    <td class="profile-item-content">{{item.class10Percentage}}</td>
+                </tr>
+                <tr class="profile-item">
+                    <td class="profile-item-label">Class XII CGPA/Percentage</td>
+                    <td>:</td>
+                    <td class="profile-item-content">{{item.class12Percentage}}</td>
+                </tr>
+                <tr class="profile-item">
+                    <td class="profile-item-label">UG College</td>
+                    <td>:</td>
+                    <td class="profile-item-content">{{item.ugCollege}}</td>
+                </tr>
+                <tr class="profile-item">
+                    <td class="profile-item-label">UG Degree</td>
+                    <td>:</td>
+                    <td class="profile-item-content">{{item.ugDegree}}</td>
+                </tr>
+                <tr class="profile-item">
+                    <td class="profile-item-label">UG Graduate Year</td>
+                    <td>:</td>
+                    <td class="profile-item-content">{{item.ugGraduationYear}}</td>
+                </tr>
+                <tr class="profile-item">
+                    <td class="profile-item-label">Resume</td>
+                    <td>:</td>
+                    <td class="profile-item-content"><a href="{% get_media_prefix %}{{item.resume}}"> {{user.username}}</a></td>
                 </tr>
                 {% endfor %}
-                {% for detail in data %}
-                <tr class="profile-item">
-                    <td class="profile-item-label">{{detail.0}}</td>
-                    <td>:</td>
-                    <td class="profile-item-content">{{detail.1}}</td>
-                </tr>
-                {% endfor %}
-                {% for detail in data %}
-                <tr class="profile-item">
-                    <td class="profile-item-label">{{detail.0}}</td>
-                    <td>:</td>
-                    <td class="profile-item-content">{{detail.1}}</td>
-                </tr>
-                {% endfor %}
-                {% for detail in data %}
-                <tr class="profile-item">
-                    <td class="profile-item-label">{{detail.0}}</td>
-                    <td>:</td>
-                    <td class="profile-item-content">{{detail.1}}</td>
-                </tr>
-                {% endfor %}
-                {% for detail in data %}
-                <tr class="profile-item">
-                    <td class="profile-item-label">{{detail.0}}</td>
-                    <td>:</td>
-                    <td class="profile-item-content">{{detail.1}}</td>
-                </tr>
-                {% endfor %}
+                {% endif %}
             </tbody>
         </table>
     </div>
@@ -75,155 +183,134 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="#step-1">
                                     <div class="num">1</div>
-                                    Basic Details
+                                    Personal Details
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#step-2">
                                     <span class="num">2</span>
-                                    Personal Details
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#step-3">
-                                    <span class="num">3</span>
                                     Academic Details
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link " href="#step-4">
-                                    <span class="num">4</span>
-                                    Documents
                                 </a>
                             </li>
                         </ul>
 
-                        <form action="">
+                        <form action="{% url 'addAdditionalDetails' %}"  method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
                             <div class="tab-content" style="padding: 1rem;">
                             
                                 <div id="step-1" class="tab-pane" role="tabpanel" aria-labelledby="step-1">
-                                    <div class="mb-3">
-                                        <label for="fname" class="form-label">First Name</label>
-                                        <input type="text" class="form-control" id="fname" placeholder="">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="lname" class="form-label">Last Name</label>
-                                        <input type="text" class="form-control" id="lname" placeholder="">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="rollno" class="form-label">Roll Number</label>
-                                        <input type="number" class="form-control" id="roll" placeholder="">
-                                    </div>
+                                    
                                     <div class="mb-3">
                                         <label for="email" class="form-label">Email address</label>
-                                        <input type="email" class="form-control" id="email" placeholder="name@example.com">
+                                        <input type="email" name="personalEmail" class="form-control" id="email" placeholder="name@example.com">
                                     </div>
                                     <div class="mb-3">
-                                        <label for="lname" class="form-label">Gender</label>
-                                        <select class="form-select" aria-label="Default select example">
+                                        <label for="gender" class="form-label">Gender</label>
+                                        <select class="form-select" name="gender" aria-label="Default select example">
                                             <option selected>Select Gender</option>
-                                            <option value="male">Male</option>
-                                            <option value="female">Female</option>
-                                            <option value="others">Others</option>
+                                            <option value="M">Male</option>
+                                            <option value="F">Female</option>
+                                        
+                                          </select>
+                                    </div>
+                                     <div class="mb-3">
+                                        <label for="jobType" class="form-label">Looking For</label>
+                                        <select class="form-select" name="jobType" aria-label="Default select example">
+                                            <option selected>Select </option>
+                                            <option value="Intern">Internship</option>
+                                            <option value="Placements">Placements</option>
                                           </select>
                                     </div>
                                     <div class="mb-3">
-                                        <label for="profile-pic" class="form-label">Profile Picture</label>
-                                        <input type="file" class="form-control" id="profile-pic">
+                                        <label for="profile-pic"  class="form-label">Profile Picture</label>
+                                        <input type="file" name="profile_pic" class="form-control" id="profile-pic">
                                     </div>
                                     <div class="mb-3">
                                         <label for="dob" class="form-label">Date-of-birth</label>
-                                        <input type="date" class="form-control" id="dob">
+                                        <input type="date"  name="dob" class="form-control" id="dob">
                                     </div>
-                                </div>
-                                <div id="step-2" class="tab-pane" role="tabpanel" aria-labelledby="step-2">
                                     <div class="mb-3">
                                         <label for="father" class="form-label">Father Name</label>
-                                        <input type="text" class="form-control" id="father" placeholder="Father's Name">
+                                        <input type="text" name="fatherName" class="form-control" id="father" placeholder="Father's Name">
                                     </div>
                                     <div class="mb-3">
                                         <label for="mother" class="form-label">Mother Name</label>
-                                        <input type="text" class="form-control" id="mother" placeholder="Mother's Name">
+                                        <input type="text" name="motherName" class="form-control" id="mother" placeholder="Mother's Name">
                                     </div>
                                     <div class="mb-3">
                                         <label for="phone" class="form-label">Phone Number</label>
-                                        <input type="tel" class="form-control" id="phone" placeholder="">
+                                        <input type="tel" name="phone" class="form-control" id="phone" placeholder="">
                                     </div>
                                     <div class="mb-3">
                                         <label for="gphone" class="form-label">Guardian Number</label>
-                                        <input type="tel" class="form-control" id="gphone" placeholder="">
+                                        <input type="tel" name="guardianPhone" class="form-control" id="gphone" placeholder="">
                                     </div>
                                     <div class="mb-3">
                                         <label for="permAdd" class="form-label">Permanent Address</label>
-                                        <input type="text" class="form-control" id="permAdd" placeholder="">
+                                        <input type="text" name="homeAddress" class="form-control" id="permAdd" placeholder="">
                                     </div>
                                     <div class="mb-3">
-                                        <label for="currAdd" class="form-label">Current Address</label>
-                                        <input type="text" class="form-control" id="currAdd" placeholder="">
+                                        <label for="currAdd"  class="form-label">Current Address</label>
+                                        <input type="text" name="localAddress" class="form-control" id="currAdd" placeholder="">
                                     </div>
                                 </div>
-                                <div id="step-3" class="tab-pane" role="tabpanel" aria-labelledby="step-3">
+
+                               
+                                <div id="step-2" class="tab-pane" role="tabpanel" aria-labelledby="step-2">
                                     <div class="mb-3">
                                         <label for="degree" class="form-label">Degree Level</label>
-                                        <select class="form-select" aria-label="Default select example">
+                                        <select class="form-select" name="degreeLevel" aria-label="Default select example">
                                             <option selected>Select Degree</option>
-                                            <option value="ug">Under-Graduate</option>
-                                            <option value="pg">Post-Graduate</option>
+                                            <option value="UG">Under-Graduate</option>
+                                            <option value="PG">Post-Graduate</option>
                                           </select>
                                     </div>
                                     <div class="mb-3">
                                         <label for="dept" class="form-label">Department</label>
-                                        <input type="text" class="form-control" id="dept" placeholder="Department">
+                                        <input type="text" name="currentDept" class="form-control" id="dept" placeholder="Department">
                                     </div>
                                     <div class="mb-3">
                                         <label for="course" class="form-label">Course</label>
-                                        <input type="text" class="form-control" id="course" placeholder="Course">
+                                        <input type="text" name="currentCourse" class="form-control" id="course" placeholder="Course">
                                     </div>
                                     <div class="mb-3">
                                         <label for="cgpa" class="form-label">CGPA</label>
-                                        <input type="number" class="form-control" id="cgpa" placeholder="">
+                                        <input type="decimal" name="currentCgpa" class="form-control" id="cgpa" placeholder="">
                                     </div>
                                     <div class="mb-3">
                                         <label for="grad-year" class="form-label">Graduation Year</label>
-                                        <input type="number" class="form-control" id="grad-year">
+                                        <input type="date" name="currentCourseGraduationYear" class="form-control" id="grad-year">
                                     </div>
                                     <div class="mb-3">
                                         <label for="10percent" class="form-label">10th Percentage</label>
-                                        <input type="number" class="form-control" id="10percent">
+                                        <input type="decimal" name="class10Percentage" class="form-control" id="10percent">
                                     </div>
                                     <div class="mb-3">
                                         <label for="12percent" class="form-label">12th Percentage</label>
-                                        <input type="number" class="form-control" id="12percent">
+                                        <input type="decimal" name="class12Percentage" class="form-control" id="12percent">
                                     </div>
                                     <!-- Option only for PG Guys -->
                                     <div class="mb-3">
                                         <label for="ugrad-percent" class="form-label">Graduation Percentage</label>
-                                        <input type="number" class="form-control" id="ugrad-percent">
+                                        <input type="decimal" name="ugCgpa" class="form-control" id="ugrad-percent">
                                     </div>
                                     <div class="mb-3">
                                         <label for="ugrad-degree" class="form-label">Graduation Degree</label>
-                                        <input type="text" class="form-control" id="ugrad-degree">
+                                        <input type="text" name="ugDegree" class="form-control" id="ugrad-degree">
                                     </div>
-                                    <div class="mb-3">
-                                        <label for="ugrad-percent" class="form-label">Graduation Percentage</label>
-                                        <input type="number" class="form-control" id="ugrad-percent">
-                                    </div>
+                                  
                                     <div class="mb-3">
                                         <label for="ugrad-college" class="form-label">Graduation College</label>
-                                        <input type="text" class="form-control" id="ugrad-college">
+                                        <input type="text" name="ugCollege" class="form-control" id="ugrad-college">
                                     </div>
                                     <div class="mb-3">
                                         <label for="ugrad-year" class="form-label">Graduation Year</label>
-                                        <input type="number" class="form-control" id="ugrad-year">
-                                    </div>
-                                </div>
-                                <div id="step-4" class="tab-pane" role="tabpanel" aria-labelledby="step-4">
-                                    <div class="mb-3">
-                                        <label for="resume" class="form-label">Resume</label>
-                                        <input type="file" class="form-control" id="resume">
+                                        <input type="date" name="ugGraduationYear" class="form-control" id="ugrad-year">
                                     </div>
                                     <input class="btn btn-primary form-submit" type="submit" value="Submit">
                                 </div>
+                                
+                                
                             </div>
                         </form>
 

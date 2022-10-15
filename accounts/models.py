@@ -20,27 +20,17 @@ class Student(models.Model):
     
     isSelected = models.BooleanField(default=False)
     
-    homeAddress = models.TextField()
-    localAddress = models.TextField()
+    homeAddress = models.TextField(blank=True, null=True)
+    localAddress = models.TextField(blank=True, null=True)
     job_choice=(('Intern',"Internship"),('Placements',"Placements"))
     jobType = models.CharField(choices=job_choice, max_length=20)
 
     isPR=models.BooleanField(default=False)
 
-    fatherName=models.CharField(max_length=255, blank=True, null=True)
-    motherName=models.CharField(max_length=255, blank=True, null=True)
+    fatherName=models.CharField(null=True, max_length=255, blank=True )
+    motherName=models.CharField(null=True, max_length=255, blank=True)
     guardianPhone=models.CharField(max_length=13, blank=True, null=True)  
     
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    objects = models.Manager()
-
-    def __str__(self):
-        return str(self.user)
-
-class EducationDetails(models.Model):
-
-    student= models.OneToOneField(Student, on_delete = models.CASCADE)
     roll=models.CharField(max_length=9, unique=True)
     
     degreeLevelChoice=(('UG',"UG"),('PG',"PG"))
@@ -58,5 +48,11 @@ class EducationDetails(models.Model):
     ugCollege=models.CharField(max_length=500, blank=True, null=True)
     ugGraduationYear=models.DateField(blank=True, null=True)
     resume= models.FileField(null=True, blank=True, upload_to='PDF/Students/resume/')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    objects = models.Manager()
+
     def __str__(self):
-        return str(self.student)
+        return str(self.user)
+
+
