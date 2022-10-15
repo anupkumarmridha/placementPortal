@@ -203,13 +203,13 @@ body{
     padding: 2rem;
 }
 
-/* input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button { 
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
     margin: 0; 
-} */
+}
 
 .login-btns {
     list-style: none;
@@ -220,6 +220,24 @@ input[type=number]::-webkit-outer-spin-button {
 .login-btns-items {
     text-decoration: none;
     padding: 1rem 0;
+}
+
+.profile-options {
+    display: flex;
+    flex-direction: column;
+}
+
+div.sw-toolbar-elm.toolbar.toolbar-bottom {
+    margin-top: 1rem;
+}
+
+.btn.btn-primary.form-submit {
+    background-color: #009ef7;
+    border: none;
+}
+
+.btn.btn-primary.form-submit:hover {
+    color: white;
 }
 
 .custom {
