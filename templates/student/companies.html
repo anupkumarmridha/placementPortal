@@ -1,0 +1,49 @@
+{% extends 'base.html' %} 
+{% load static %}
+{% block title %}Update Resume - Placement, NITT{% endblock title %} 
+
+{% block body %}
+    <div class="container-fluid">
+        <table class="table table-striped table-hover table-info overflow-auto">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>CTC</th>
+                    <th>Profile</th>
+                    <th>Open For</th>
+                    <th>Registration Deadline</th>
+                    <th>Status</th>
+                    <th>Register</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><a href="#">Amazon</a></td>
+                    <td>43L</td>
+                    <td>SDE</td>
+                    <td>All B.Tech, All M.Tech, MCA</td>
+                    <td>15/10/2022</td>
+                    <td>Open</td>
+                    <td>
+                        <a href="#">
+                            <button class="btn btn-info">Register</button>
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td><a href="#">KLA</a></td>
+                    <td>23L</td>
+                    <td>SDE</td>
+                    <td>MCA</td>
+                    <td>15/10/2022</td>
+                    <td>Open</td>
+                    <td>
+                        <a href="#">
+                            <button class="btn btn-info">Register</button>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+{% endblock body %}

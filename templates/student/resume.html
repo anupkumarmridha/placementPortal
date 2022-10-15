@@ -1,0 +1,12 @@
+{% extends 'base.html' %} 
+{% load static %}
+{% block title %}Update Resume - Placement, NITT{% endblock title %} 
+
+{% block body %}
+    <div class="container-fluid p-3 fs-6">
+        <form action="POST">
+            <label class="form-label">Upload Resume:</label>
+            <input class="form-control" type="file" name="resume" id="resume" />
+        </form>
+    </div>
+{% endblock body %}

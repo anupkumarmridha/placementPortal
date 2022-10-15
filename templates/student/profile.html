@@ -1,0 +1,55 @@
+{% extends 'base.html' %} 
+{% load static %}
+{% block title %}Profile - Placement, NITT{% endblock title %} 
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="profile-header">
+            <h4 class="h-4">Welcome, Bhushan Mendhe</h4>
+            <img src="{% static "img/Bhushan.jpg" %}" alt="No image found!" class="profile-img img-fluid" type="image">
+        </div>
+        <div class="profile-details table-hover table-responsive">
+            <table class="table">
+                <thead></thead>
+                <tbody>
+                    {% for detail in data %}
+                        <tr class="profile-item">
+                            <td class="profile-item-label">{{detail.0}}</td>
+                            <td>:</td>
+                            <td class="profile-item-content">{{detail.1}}</td>
+                        </tr>
+                    {% endfor %}
+                    {% for detail in data %}
+                        <tr class="profile-item">
+                            <td class="profile-item-label">{{detail.0}}</td>
+                            <td>:</td>
+                            <td class="profile-item-content">{{detail.1}}</td>
+                        </tr>
+                    {% endfor %}
+                    {% for detail in data %}
+                        <tr class="profile-item">
+                            <td class="profile-item-label">{{detail.0}}</td>
+                            <td>:</td>
+                            <td class="profile-item-content">{{detail.1}}</td>
+                        </tr>
+                    {% endfor %}
+                    {% for detail in data %}
+                        <tr class="profile-item">
+                            <td class="profile-item-label">{{detail.0}}</td>
+                            <td>:</td>
+                            <td class="profile-item-content">{{detail.1}}</td>
+                        </tr>
+                    {% endfor %}
+                    {% for detail in data %}
+                        <tr class="profile-item">
+                            <td class="profile-item-label">{{detail.0}}</td>
+                            <td>:</td>
+                            <td class="profile-item-content">{{detail.1}}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            
+        </div>
+    </div>
+{% endblock body %}
