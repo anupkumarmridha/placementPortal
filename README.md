@@ -1,5 +1,6 @@
 # placementPortal
-This Project is made for Smooth functioning of Campus Placement Process.
+
+NITT is one of the most prestigious institutest in India having great placement records, but the entire placement process is still managed manually. Henceforth, feeling the requirement of an automated system, we decided to build NITT Placement Portal.
 
 Team Leader - Bhushan Mendhe (205121033)
 Team Members - Anup Kumar Mridha (205121025)
