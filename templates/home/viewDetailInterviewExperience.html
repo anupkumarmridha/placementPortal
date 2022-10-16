@@ -1,0 +1,12 @@
+{% extends 'base.html' %} {% load static %} {% block title %}Interview
+Expriences{% endblock title %} 
+
+{% block body %}
+<div class="container-fluid">
+  {% for exp in intvExp %} <br> Name: {{exp.user.first_name}}<br> Compnay: {{exp.company}}
+  {{exp.jobProfile}}
+  <p>{{exp.experience | safe}}</p>
+</div>
+
+{% endfor %}
+{% endblock body %}

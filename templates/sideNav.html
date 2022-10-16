@@ -9,8 +9,12 @@
         <li class="sidenav-list-item"><i class="bi bi-cloud-upload"></i> <a href="{% url 'updateResume' %}" class="dash-link">Update Resume</a>
         </li>
         <li class="sidenav-list-item"><i class="bi bi-list-ul"></i> <a href="{% url 'companies' %}" class="dash-link">Companies</a></li>
+        <li class="sidenav-list-item"><i class="bi bi-circle"></i> <a href="{% url 'viewInterviewExperience' %}" class="dash-link">Interview Expriences</a></li>
+        <li class="sidenav-list-item"><i class="bi bi-app-indicator"></i> <a href="{% url 'addInterviewExperience' %}" class="dash-link">Add Interview Expriences</a></li>
+        <li class="sidenav-list-item"><i class="bi bi-archive"></i> <a href="{% url 'jobList' %}" class="dash-link">Jobs</a></li>
         {% if user.student.isPR %}
-        <li class="sidenav-list-item"><i class="bi bi-list-ul"></i> <a href="{% url 'addCompany' %}" class="dash-link">Add Companies</a></li>
+        <li class="sidenav-list-item"><i class="bi bi-arrow-bar-up"></i> <a href="{% url 'addCompany' %}" class="dash-link">Add Companies</a></li>
+        <li class="sidenav-list-item"><i class="bi bi-basket3"></i> <a href="{% url 'addJob' %}" class="dash-link">Add Job</a></li>
         {% endif %}
         <li class="sidenav-list-item"><i class="bi bi-key-fill"></i> <a href="#" class="dash-link">Change Password</a>   </li>
         <ul class="login-btns">

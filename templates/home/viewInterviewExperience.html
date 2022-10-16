@@ -1,0 +1,33 @@
+{% extends 'base.html' %} 
+{% load static %}
+{% block title %}Interview Expriences{% endblock title %} 
+
+{% block body %}
+    <div class="container-fluid">
+        <table class="table table-striped table-hover table-info overflow-auto">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Company</th>
+                    <th>Profile</th>
+                    <th>Expriences</th>
+                    <th>Posted on</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if intExp %}
+                {% for exp in intExp %}
+                <tr>
+                    <td> {{ user.first_name }}</td>
+                    <td>{{ exp.company }}</td>
+                    <td>{{ exp.jobProfile }}</td>
+                    <td><a href="{% url 'viewDetailInterviewExperience' exp.pk %}"> {{ exp.experience | slice:':20' | safe }}</a></td>
+                </tr>
+                {% endfor %}
+                {% else %}
+                No companies available
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+{% endblock body %}

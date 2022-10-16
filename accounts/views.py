@@ -1,12 +1,12 @@
 from logging import exception
 from django.shortcuts import render, HttpResponse, redirect
+from accounts import studentView
 
 from accounts.EmailBackEnd import EmailBackEnd
 from django.contrib.auth import authenticate, login, logout
 from accounts.models import Student, User
 from django.contrib import messages
 from home import views
-from home.models import Job, Selection
 from datetime import datetime, timedelta
 from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import render_to_string
@@ -14,10 +14,7 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_str
 from django.core.mail import EmailMessage
 from typing import Protocol
-from django.urls import reverse_lazy, reverse
-from accounts.updateStudentForm import updateStudentDetails
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-
+from accounts.studentView import viewStudentProfile
 # Create your views here.
 
 from .tokens import account_activation_token
@@ -112,7 +109,7 @@ def handelSingup(request):
             myuser.save()
             
             # print("here")
-            # activateEmail(request, myuser, email)
+            activateEmail(request, myuser, email)
             messages.success(request, "Account Created Successfully!")
             return redirect(views.homeView)
 
@@ -138,10 +135,10 @@ def handleLogin(request):
         if user is not None:
             login(request, user)
             messages.success(request, "Successfuly logged in 🥰")
-            return redirect(views.homeView)
+            return redirect(viewStudentProfile)
         else:
             messages.error(request, "Invalid credentialsl, Please try again 😎")
-            return redirect(views.homeView)
+            return redirect(viewStudentProfile)
 
 
 def handleLogout(request):
@@ -170,15 +167,6 @@ def changePassword(request):
                 messages.error(request, "problem arise .") 
 
 # To add or update resume
-def addResume(request):
-    if request.method == 'POST':
-        resume = request.POST['resume']
-        try:
-            Student.objects.filter(id=request.user).update(resume=resume)
-        except:
-            return HttpResponse('5XX - Some Error Occured')
-    else:
-        return HttpResponse('404 - NOT FOUND')
 
 def updateDetails(request):
     if request.method == 'POST':
@@ -217,20 +205,5 @@ def updatePassword(request):
     else:
         return HttpResponse('404 - NOT FOUND')
 
-def getJobListing(request):
-    if request.method == 'GET':
-        try:
-            last2month = datetime.today() - timedelta(days=60)
-            jobs = Job.objects.filter(created_at__gte=last2month).order_by('created_at')
-            return HttpResponse(jobs)
-        except:
-            return HttpResponse('5XX - Some Error Occured')
-    else:
-        return HttpResponse('404 - NOT FOUND')
 
-class updateCompany(UpdateView):
-    model=Student
-    form_class=updateStudentDetails
-    template_name='home/updateDetails.html'
-    def get_success_url(self):
-        return reverse(views.homeViews)        
+    

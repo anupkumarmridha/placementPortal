@@ -6,9 +6,9 @@
 <div class="container-fluid">
     <div class="profile-header">
         <div class="profile-options">
-            <h4 class="h-4">Welcome, Bhushan Mendhe</h4>
+            <h4 class="h-4">Welcome, {{user.first_name}}</h4>
             {% if studentDetails %}
-            <a href="#" type="button" class="btn btn-primary" >
+            <a href="{% url 'updateDetails' user.pk %}" type="button" class="btn btn-primary" >
                 Update Profile
             </a>
             {% else %}
@@ -17,7 +17,7 @@
             </button>
             {% endif %}
         </div>
-        {% if user.profile.profile_pic %}
+        {% if user.student.profile_pic %}
         <img src="{{ user.student.profile_pic.url }}" class="rounded-circle"  width=75 height=75>
     
         {% else %}
@@ -157,7 +157,7 @@
                 <tr class="profile-item">
                     <td class="profile-item-label">Resume</td>
                     <td>:</td>
-                    <td class="profile-item-content"><a href="{% get_media_prefix %}{{item.resume}}"> {{user.username}}</a></td>
+                    <td class="profile-item-content"><a target="_blank" href="{% get_media_prefix %}{{item.resume}}"> {{user.username}}</a></td>
                 </tr>
                 {% endfor %}
                 {% endif %}

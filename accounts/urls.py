@@ -12,6 +12,7 @@ urlpatterns = [
   path('addAdditionalDetails/',studentView.addAdditionalDetails, name='addAdditionalDetails'),
   path('viewStudentProfile/',studentView.viewStudentProfile, name='viewStudentProfile'),
   path('updateResume/',studentView.updateResume, name='updateResume'),
+  path('updateDetails/<int:pk>',studentView.updateDetails.as_view(), name='updateDetails'),
 
 
   # to reset password

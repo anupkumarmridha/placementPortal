@@ -3,11 +3,13 @@
 {% block title %}Update Resume - Placement, NITT{% endblock title %} 
 
 {% block body %}
+
     <div class="container-fluid p-3 fs-6">
         <form action="{% url 'updateResume' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <label class="form-label">Upload Resume:</label>
             <input class="form-control" type="file" name="resume" id="resume" />
+            <br>
             <input class="btn btn-primary form-submit" type="submit" value="Submit">
         </form>
     </div>

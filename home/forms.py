@@ -30,33 +30,41 @@ class updateCompanyForm(forms.ModelForm):
 
 
 
-class jobForm(forms.ModelForm):
+companies=Company.objects.all().values_list('companyName','companyName')
+com_choices_list=[]
+for item in companies:
+    com_choices_list.append(item)
+
+
+class addJobForm(forms.ModelForm):
     class Meta:
         model = Job
-        fields = ('company', 'role',
-                  'description', 'ctc', 'profile', 'location', 'open', 'pr')
+        fields = ('company', 'role','description', 'ctc', 'profile', 'location', 'opens')
+        print(com_choices_list)
         widgets = {
-            'company': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter the Company'}),
+            'company': forms.Select(choices=com_choices_list, attrs={'class': 'form-control'}),
             'role': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter Role'}),
             'description': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter Job Description'}),
             'ctc': forms.TextInput(attrs={'class': 'form-control', 'type': 'number','placeholder': 'Enter the Company Description'}),
             'profile': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter Job Profile'}),
-            'location': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter Job Profile'}),
-            'open': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Open for Courses'}),
-            'pr': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Assigned PR'}),
+            'location': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter Job Locations'}),
+            'opens': forms.Select(choices=(('True',"True"),('False',"False"))),
         }
 
-class interviewExperience(forms.ModelForm):
+class addInterviewExperienceForm(forms.ModelForm):
     class Meta:
         model = InterviewExperience
         fields = ('user', 'company',
                   'jobProfile', 'experience')
         widgets = {
-            'user': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter User Name'}),
-            'company': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter Company Name'}),
+            'user': forms.TextInput(attrs={'class': 'form-control','value':'', 'id':'user_id', 'type':'hidden'}),
+            'company': forms.Select(choices=com_choices_list, attrs={'class': 'form-control'}),
             'jobProfile': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter Job Profile'}),
             'experience': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter your interview experience here'}),
         }
+        
+        def get_object(self):
+            return self.request.user
 
 class selection(forms.ModelForm):
     class Meta:
@@ -70,11 +78,9 @@ class selection(forms.ModelForm):
 class studentJob(forms.ModelForm):
     class Meta:
         model = StudentJob
-        fields = ('student', 'job',
-                  'verdict_choice', 'verdict')
+        fields = ('student', 'job','verdict')
         widgets = {
             'student': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter Student Name'}),
             'job': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter Job'}),
-            'verdict_choice': forms.Select(attrs={'class': 'form-control'}),
             'verdict': forms.Select(attrs={'class': 'form-control'}),
         }        

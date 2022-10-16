@@ -1,3 +1,4 @@
+from dbm.dumb import error
 from logging import exception
 from django.urls import path
 from accounts import studentView
@@ -8,6 +9,8 @@ from django.urls import reverse_lazy, reverse
 from home import views
 from accounts.EmailBackEnd import EmailBackEnd
 from django.contrib.auth import authenticate, login, logout
+from accounts.updateStudentForm import updateStudentDetails
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 def addAdditionalDetails(request):
     if request.method == "POST":
@@ -91,6 +94,7 @@ def viewStudentProfile(request):
         }
         return render(request, "student/studentDashboard.html", context)
     except Exception as e:
+        print(e)
         messages.error(request, "Student profile not found")
         print(e)
     return render(request, "student/studentDashboard.html")
@@ -114,3 +118,10 @@ def updateResume(request):
         return redirect(views.homeView)
 
     return render(request,'student/resume.html')
+
+class updateDetails(UpdateView):
+    model=Student
+    form_class=updateStudentDetails
+    template_name='student/updateDetails.html'
+    def get_success_url(self):
+        return reverse_lazy('homeView')

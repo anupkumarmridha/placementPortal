@@ -1,7 +1,9 @@
+from email.policy import default
 from unittest.util import _MAX_LENGTH
 from django.db import models
 from accounts.models import User, Student
 from ckeditor.fields import RichTextField
+import datetime
 # Create your models here.
 
 class Company(models.Model):
@@ -26,10 +28,9 @@ class Job(models.Model):
     ctc = models.DecimalField(max_digits = 10, decimal_places = 2)
     profile = models.CharField(max_length = 255)
     location = models.CharField(max_length = 500)
-    
-    open = models.BooleanField(default=False)
-    pr = models.ForeignKey(Student, on_delete = models.CASCADE)
-
+    opens = models.BooleanField(default=False)
+    deadline= models.DateTimeField()
+    link=models.CharField(max_length = 500, default="https://forms.gle/aMQFV8DkUhmefzvu8")
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)
     #company requirement details

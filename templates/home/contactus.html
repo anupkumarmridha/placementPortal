@@ -1,17 +1,11 @@
-{% comment %} {% extends 'base.html' %}  {% endcomment %}
 {% load static %}
-{% if user.is_authenticated %}
-    {% include 'base.html' %}
-{% else %}
-{% comment %} {% block homeactive %} active {% endblock homeactive %}
-{% else %} {% endcomment %}
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Placement Portal</title>
-
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
@@ -25,49 +19,37 @@
 
     <link rel="stylesheet" href="{% static "css/personalModal.css" %}">
     <link rel="stylesheet" href="{% static "css/styles.css" %}" />
-  </head>
-  <body>
+</head>
+<body>
     <nav>
-      <a href="/" class="logo">Placement Portal</a>
-      <ul>
-        <li><a href="#">ABOUT</a></li>
-        <li><a href="#">PLACEMENT POLICY</a></li>
-        <li><a href="{% url 'contactus' %}">CONTACT US</a></li>
-        <li><button type="button"  data-bs-toggle="modal" data-bs-target="#signupModal">SIGNUP</button></li>
-        <li><button type="button"  data-bs-toggle="modal" data-bs-target="#loginModal">LOGIN</button></li>
-      </ul>
-    </nav>
-    <!--Singup Modal -->
+        <a href="/" class="logo">Placement Portal</a>
+        <ul>
+            <li><a href="#">ABOUT</a></li>
+            <li><a href="#">PLACEMENT POLICY</a></li>
+            <li><a href="#">CONTACT US</a></li>
+            {% if not user.is_authenticated %}
+            <li><button type="button"  data-bs-toggle="modal" data-bs-target="#signupModal">SIGNUP</button></li>
+            <li><button type="button"  data-bs-toggle="modal" data-bs-target="#loginModal">LOGIN</button></li>
+            {% endif %}
+        </ul>
+        </nav>
+        <!--Singup Modal -->
     {% include 'signup.html' %}
     <!--End Singup Modal -->
       
     <!--Login Modal -->
     {% include 'login.html' %}
     <!--End Login Modal -->
-    <main>
-      <div class="image" style="background-image: url({% static "img/TP.jpeg" %})">
-        <div class="random">
-          <div class="slogan">Bright Future of Students is our mission</div>
-          <div class="subslogan">
-            To be a university globally trusted for technical excellence where
-            learning and research integrate to sustain society and industry.
-          </div>
-          <div class="arrow-down"></div>
-        </div>
-      </div>
+    <main class="contactus">
+            <div>
+                <h1>Contact Us</h1>
+                <p><b>Email:</b> tp@nitt.edu, tnp.nitt@gmail.com</p>
+                <p><b>Mobile:</b> 9486001174 / 9486001140</p>
+                <p><b>Address:</b> National Institute of Technology, Trichy, opp Octagon, next to SBI ATM, Tamil Nadu 620015</p>
+            </div>
+             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1483.2074385941328!2d78.81466170072146!3d10.759292270204297!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3baa8df5b9c573c7%3A0xefefffc875b03ac4!2sCapstone%20(Training%20%26%20Placement)%20NIT%20Trichy!5e0!3m2!1sen!2sin!4v1665884452667!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </main>
-    <section>
-        <div class="overview">
-            <h2>Overview of Institute</h2>
-            <p>The National Institute of Technology Tiruchirappalli is one of the most reputed institutes for Technological education and research in India. Known for its strong relation with industry, the Institute has always been a favourite destination for requirement of many firms.
-The Placement and Internship Office is the nodal point of contact for companies seeking to establish a fruitful relationship with NIT Trichy. It is our motto to provide converging learning environment to serve a dynamically evolving society.</p>
-        </div>
-        <div>
-            <img src="{% static "img/NIT_Trichy_Clock_tower.jpeg" %}" alt="Clock Tower" />
-        </div>
-    </section>
     <footer>© National Institute of Technology, Tiruchirappalli</footer>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
@@ -80,6 +62,5 @@ The Placement and Internship Office is the nodal point of contact for companies 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/smartwizard@6/dist/js/jquery.smartWizard.min.js" type="text/javascript"></script>
     <script type="text/javascript" src="{% static "js/script.js" %}"></script> 
-  </body>
+</body>
 </html>
-{% endif %}
