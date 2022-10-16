@@ -76,13 +76,15 @@ def addInterviewExperience(request):
     context = {"form": form}
     return render(request, "home/addInterviewExperience.html", context=context)
 
+
 def viewInterviewExperience(request):
-    intExp= InterviewExperience.objects.all()
+    intExp = InterviewExperience.objects.all()
     context = {"intExp": intExp}
     return render(request, "home/viewInterviewExperience.html", context=context)
 
+
 def viewDetailInterviewExperience(request, pk):
-    intvExp= InterviewExperience.objects.filter(pk=pk)
+    intvExp = InterviewExperience.objects.filter(pk=pk)
 
     context = {"intvExp": intvExp}
     return render(request, "home/viewDetailInterviewExperience.html", context=context)
@@ -91,7 +93,6 @@ def viewDetailInterviewExperience(request, pk):
 def addJob(request):
 
     if request.method == "POST":
-
         try:
             user = request.user
             student = Student.objects.get(user=user)
@@ -100,14 +101,17 @@ def addJob(request):
                 if form.is_valid():
                     form.save()
                     messages.success(request, "job info added successfully")
+                    print("there")
                     return redirect("homeView")
                 else:
                     messages.error(request, "Form is Not Valid")
             else:
                 messages.error(request, "Not Authenticated")
         except Exception as e:
+
             print(e)
     else:
+        print("here")
         form = addJobForm()
     context = {"form": form}
     return render(request, "home/addJob.html", context=context)
@@ -365,6 +369,7 @@ def addStudentJob(request):
 
 # PR-> Company -> convince close /open PPT OT PI time slot venue shortlisted candidates selected candidates
 # csv file for the students who attempted OT
+
 
 def contactus(request):
     return render(request, "home/contactus.html")

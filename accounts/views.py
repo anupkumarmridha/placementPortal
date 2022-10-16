@@ -109,7 +109,7 @@ def handelSingup(request):
             myuser.save()
             
             # print("here")
-            activateEmail(request, myuser, email)
+            # activateEmail(request, myuser, email)
             messages.success(request, "Account Created Successfully!")
             return redirect(views.homeView)
 
