@@ -66,7 +66,7 @@ def addInterviewExperience(request):
             if form.is_valid():
                 form.save()
                 messages.success(request, "Your Expriences Added Successfully")
-                return redirect("homeView")
+                return redirect("viewInterviewExperience")
             else:
                 messages.error(request, "Form is Not Valid")
         except Exception as e:
@@ -102,7 +102,7 @@ def addJob(request):
                     form.save()
                     messages.success(request, "job info added successfully")
                     print("there")
-                    return redirect("homeView")
+                    return redirect("jobList")
                 else:
                     messages.error(request, "Form is Not Valid")
             else:
