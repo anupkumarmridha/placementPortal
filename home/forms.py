@@ -43,12 +43,13 @@ class updateCompanyForm(forms.ModelForm):
             ),
         }
 
-
-companies = Company.objects.all().values_list("companyName", "companyName")
-com_choices_list = []
-for item in companies:
-    com_choices_list.append(item)
-
+try:
+    companies = Company.objects.all().values_list("companyName", "companyName")
+    com_choices_list = []
+    for item in companies:
+        com_choices_list.append(item)
+except Exception as e:
+    pass
 
 class addJobForm(forms.ModelForm):
     class Meta:
