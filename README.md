@@ -5,11 +5,11 @@ NITT is one of the most prestigious institutest in India having great placement 
 Team Leader - <br />
 &emsp; **Bhushan Mendhe (205121033)** <br />
 Team Members - <br />
-emsp **Anup Kumar Mridha (205121025)** <br />
-emsp **Varun Singh (205121101)** <br />
-emsp **Aastha Srivastava (205121001)** <br />
-emsp **Puneet Kumar (205121114)** <br />
-emsp **Ankur Bohra (205121023)** <br />
+&emsp; **Anup Kumar Mridha (205121025)** <br />
+&emsp; **Varun Singh (205121101)** <br />
+&emsp; **Aastha Srivastava (205121001)** <br />
+&emsp; **Puneet Kumar (205121114)** <br />
+&emsp; **Ankur Bohra (205121023)** <br />
 
 
 ## Steps to Run the Project:
