@@ -3,7 +3,7 @@
 NITT is one of the most prestigious institutest in India having great placement records, but the entire placement process is still managed manually. Henceforth, feeling the requirement of an automated system, we decided to build NITT Placement Portal.<br /><br />
 
 Team Leader - <br />
-emsp **Bhushan Mendhe (205121033)** <br />
+&emsp **Bhushan Mendhe (205121033)** <br />
 Team Members - <br />
 emsp **Anup Kumar Mridha (205121025)** <br />
 emsp **Varun Singh (205121101)** <br />
