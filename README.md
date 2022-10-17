@@ -23,8 +23,8 @@ Team Members - <br />
     `python manage.py migrate`<br />
     `python manage.py createsuperuser`<br />
 3. This will ask you for the Username, Email, and password for the superuser<br />
-emsp Username: admin<br />
-emsp Email: admin@nitt.edu<br />
-emsp **Note** : The username and password should be same as mentioned but the password can be different.<br />
+&emsp; Username: admin<br />
+&emsp; Email: admin@nitt.edu<br />
+&emsp; **Note** : The username and password should be same as mentioned but the password can be different.<br />
 4. Run command: `python manage.py runserver`<br />
 5. This will start the local server where you can see the web app running.<br />
