@@ -38,8 +38,7 @@
         {% include 'nav.html' %}
     
         <!--End Navbar -->
-        <!-- Profile Block -->
-        {% block profile %}{% endblock profile %}
+
       
         {% if messages %} {% for message in messages %}
       
@@ -49,6 +48,9 @@
         </div>
         {% endfor %} {% endif %}
       
+         <!-- Profile Block -->
+        {% block profile %}{% endblock profile %}
+        
         <!--Singup Modal -->
       {% include 'signup.html' %}
         <!--End Singup Modal -->
