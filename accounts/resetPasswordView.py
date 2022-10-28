@@ -14,7 +14,7 @@ from .forms import SetPasswordForm, PasswordResetForm
 from .decorators import user_not_authenticated
 from .tokens import account_activation_token
 from home import views
-from accounts import views as accountsView
+from home.views import homeView
 @login_required
 def password_change(request):
     user = request.user
@@ -23,7 +23,7 @@ def password_change(request):
         if form.is_valid():
             form.save()
             messages.success(request, "Your password has been changed")
-            return redirect(accountsView.handleLogin)
+            return redirect(homeView)
         else:
             for error in list(form.errors.values()):
                 messages.error(request, error)
